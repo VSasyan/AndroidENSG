@@ -13,7 +13,7 @@ Afin de pouvoir aisément tester votre application, vous pouvez utiliser l'émul
 
 Vous pouvez gérer téléphones *émulés* via le bouton `AVD Manager` :
 
-![AVD Manager](screens/1_avd_manager.png)
+![AVD Manager](screens/2_avd_manager.png)
 
 Au lancement de votre application, Android Studio vous proposera de choisir le téléphone à utiliser.
 
@@ -21,9 +21,9 @@ Au lancement de votre application, Android Studio vous proposera de choisir le t
 
 Au premier démarrage d'Android Studio, nous avons téléchargé la dernière version du SDK Android et la version 24. Vous pouvez télécharger d'autres versions en ouvrant le `SDK Manager` :
 
-![SDK Manager](screens/1_sdk_manager.png)
+![SDK Manager](screens/2_sdk_manager.png)
 
-(C'est en fait un raccourcis vers [les options de configurations Android Studio](0_installation_android_studio.md#configuration-avanc%C3%A9e) déjà utilisées.)
+(C'est en fait un raccourci vers [les options de configurations Android Studio](0_installation_android_studio.md#configuration-avanc%C3%A9e) déjà utilisées.)
 
 Il n'y a pas que les SDK principaux, mais également d'autres outils (comme par exemple les Google Services qui permettent notamment de faire des cartes).
 
@@ -72,25 +72,25 @@ Le panneau de gauche vous donnant la liste des fichiers composant votre applicat
 
 Exemple du panneau de gauche VS la véritable structure des données :
 
-![Structure Gradle](screens/1_structure_gradle.png)
+![Structure Gradle](screens/2_structure_gradle.png)
 
 ### Compilation et lancement
 
 Pour compiler votre projet, cliquez sur le bouton `Make Project` (Ctrl + F9) :
 
-![SDK Manager](screens/1_make_project.png)
+![SDK Manager](screens/2_make_project.png)
 
 Cela permet de vérifier que tout est bon : pas d'erreur Java, les dépendances sont chargées, etc.
 
 Pour lancer votre projet, cliquez sur le bouton `Run 'app'` (Maj + F10) :
 
-![SDK Manager](screens/1_run_app.png)
+![SDK Manager](screens/2_run_app.png)
 
 Android Studio va alors vous demander de choisir où lancer votre application :
 * sur un téléphone connecté à l'ordinateur ;
 * sur un téléphone émulé.
 
-![SDK Manager](screens/1_run_smartphone.png)
+![SDK Manager](screens/2_run_smartphone.png)
 
 
 ## Organisation du code
@@ -148,6 +148,7 @@ Vous pouvez alors activer ou désactiver chaque permission :
 
 ![Permissions](screens/android_6_autorisations_3.png)
 
+
 ### Les activités (Vue/Contrôleur)
 
 Votre application sera composée d'activités, à chaque activité est associée :
@@ -164,11 +165,11 @@ Il permet de séparer :
 
 ### Gestion événementielle (Observateur/observable)
 
-Pour gérer les événements (clique de l'utilisateur sur un bouton, fin d'un traitement), Android utilise le pattern Observateur/observable.
+Pour gérer les événements (clic de l'utilisateur sur un bouton, fin d'un traitement), Android utilise le pattern Observateur/observable.
 
-Le principe est que l'on définie une relation entre un objet (1) et d'autres objets (0..n). Si l'objet change d'état, tous les objets qui en dépendent sont informés du changement.
+On définit une relation entre un objet (1) et d'autres objets (0..n) : si l'objet change d'état, tous les objets qui en dépendent sont informés du changement.
 
-Vous allez créer un lien entre un objet Java (bouton par exemple) pour que quand un certain événement se produit (par exemple un clique de l'utilisateur) une certaine fonction soit exécutée (exactement comme en JavaScript).
+Vous allez créer un lien entre un objet Java (bouton par exemple) pour que quand un certain événement se produit (par exemple un clic de l'utilisateur) une certaine fonction soit exécutée (exactement comme en JavaScript).
 
 Exemple en JavaScript :
 
@@ -208,7 +209,7 @@ Le principe en Java est exactement le même (sauf qu'en Java tout est objet, on 
 
 ```
 
-En général, ou utilise un écouteur d'événement anonyme (on ne le stocke pas dans une variable, mais on défini de suite comme écouteur à utiliser) :
+En général, ou utilise un écouteur d'événement anonyme (on ne le stocke pas dans une variable, mais on le définit de suite comme écouteur à utiliser) :
 
 ```java
     // Je déclare ma variable (le bouton)
@@ -234,15 +235,17 @@ Il y a deux méthodes pour créer des vues :
 * par combinaison : création de toute l'interface au chargement de l'activité via un code java (très fastidieux) ;
 * par **déclaration** : utilisation d'un **fichier XML** pour décrire la vue (l'instanciation en Java est faites automatiquement).
 
-Il y a deux patron de conception derrière les vues en Android :
-* composite ;
-* décorateur.
+Nous utilisons principalement la seconde manière, mais il est tout à fait possible d'enrichir une vue dynamiquement via un code Java.
+
+Il y a deux patrons de conception derrière les vues en Android :
+* composite (gestion des groupe d'éléments) ;
+* décorateur : altération des éléments).
 
 #### Patron de conception Composite
 
 ![Composite Pattern - Wikipédia](screens/2_pattern_composite.png)
 
-Ce design pattern permet de manipuler les groupes d'objet comme s'il s'agissait d'un seul objet.
+Ce design pattern permet de manipuler les groupes d'objets comme s'il s'agissait d'un objet simple.
 
 Chaque objet de la vue sera ou un élément (zone de text, bouton, ...) ou un groupe d'élément (LinearLayout, VerticalLayout, ...).
 

@@ -268,7 +268,7 @@ Maintenant, nous devons ajouter l'écouteur d'événement. Nous allons utiliser 
     });
 ```
 
-Dans ce code, nous instancions un écouteur d'événement anonyme (non stocké dans une varaible) directement défini comme l'écouteur d'événement du bouton.
+Dans ce code, est instancié un écouteur d'événement anonyme (non stocké dans une variable) et directement définit comme l'écouteur d'événement du bouton.
 
 La fonction `onClick` de cet écouteur est appelée au clic sur le bouton.
 
