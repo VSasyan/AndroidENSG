@@ -78,19 +78,19 @@ Exemple du panneau de gauche VS la véritable structure des données :
 
 Pour compiler votre projet, cliquez sur le bouton `Make Project` (Ctrl + F9) :
 
-![SDK Manager](screens/2_make_project.png)
+![Make Project](screens/2_make_project.png)
 
 Cela permet de vérifier que tout est bon : pas d'erreur Java, les dépendances sont chargées, etc.
 
 Pour lancer votre projet, cliquez sur le bouton `Run 'app'` (Maj + F10) :
 
-![SDK Manager](screens/2_run_app.png)
+![Run App](screens/2_run_app.png)
 
 Android Studio va alors vous demander de choisir où lancer votre application :
 * sur un téléphone connecté à l'ordinateur ;
 * sur un téléphone émulé.
 
-![SDK Manager](screens/2_run_smartphone.png)
+![Select Deployment Target](screens/2_run_smartphone.png)
 
 
 ## Organisation du code
@@ -193,7 +193,8 @@ Le principe en Java est exactement le même (sauf qu'en Java tout est objet, on 
     View.OnClickListener eventListener;
     Button b_button;
 
-    // J'instancie l'écouteur d'événement : une classe avec une seule méthode "onClick" qui sera exécutée au clic (d'où le nom...)
+    // J'instancie l'écouteur d'événement : une classe avec une seule
+    // méthode "onClick" qui sera exécutée au clic (d'où le nom...)
     eventListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -201,24 +202,28 @@ Le principe en Java est exactement le même (sauf qu'en Java tout est objet, on 
         }
     };
 
-    // J'instancie le bouton : je récupère l’objet de l'interface graphique et l'instancie en un objet Java qui le représente
+    // J'instancie le bouton : je récupère l’objet de l'interface
+    // graphique et l'instancie en un objet Java qui le représente
     b_button = (Button)findViewById(R.id.b_button);
 
-    // Je définie l’écouteur d'événement précédemment crée comme étant l'écouteur de mon bouton
+    // Je définie l’écouteur d'événement précédemment crée
+    // comme étant l'écouteur de mon bouton
     b_button.setOnClickListener(eventListener);
 
 ```
 
-En général, ou utilise un écouteur d'événement anonyme (on ne le stocke pas dans une variable, mais on le définit de suite comme écouteur à utiliser) :
+En général on utilise un écouteur d'événement anonyme (on ne le stocke pas dans une variable, mais on le définit de suite comme écouteur à utiliser) :
 
 ```java
     // Je déclare ma variable (le bouton)
     Button b_button;
 
-    // J'instancie le bouton : je récupère l’objet de l'interface graphique et l'instancie en un objet Java qui le représente
+    // J'instancie le bouton : je récupère l’objet de l'interface
+    // graphique et l'instancie en un objet Java qui le représente
     b_button = (Button)findViewById(R.id.b_button);
 
-    // Je définie l’écouteur d'événement comme étant l'écouteur de mon bouton au moment même où je l'instancie
+    // Je définie l’écouteur d'événement comme étant l'écouteur
+    // de mon bouton au moment même où je l'instancie
     b_button.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {

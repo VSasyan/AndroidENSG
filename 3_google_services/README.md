@@ -13,7 +13,7 @@ Nous allons utiliser :
 
 Nous allons créer une application permettant à utilisateur :
 * d'afficher une carte
-* se géolocaliser et connaitre son adresse actuelle.
+* se géolocaliser et connaître son adresse actuelle.
 
 ## Mise en place
 
