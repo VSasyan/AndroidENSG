@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>230</y>
+      <w>210</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>User
+--
+email: String
+encodedPassword: String
+firstName: String
+lastName: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>690</x>
+      <y>370</y>
+      <w>210</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>/DAO&lt;T&gt;/
+--
+/create(T obj): T/
+/update(T obj): boolean/
+/delete(T obj): boolean/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>100</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>/DataBaseObject/
+--
+id : Long</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>790</x>
+      <y>230</y>
+      <w>210</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>PointOfInterest
+--
+title: String
+description: String
+lat: Double
+lng: Double
+userId: Long</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>800</x>
+      <y>510</y>
+      <w>420</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>PointOfInterestDAO&lt;PointOfInterest&gt;
+--
+create(PointOfInterest obj): PointOfInterest
+update(PointOfInterest obj): boolean
+delete(PointOfInterest obj): boolean
+findByUserID(Long user_id): ArrayList&lt;PointOfInterest&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>510</y>
+      <w>510</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>UserDAO&lt;User&gt;
+--
+create(User obj): User
+update(User obj): boolean
+delete(User obj): boolean
+findByEmailAndEncodedPassword(String email, String encodedPasword): User
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>760</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>DataBaseHelper
+--
+onCreate(SQLiteDatabase db);
+onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion);</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>710</x>
+      <y>690</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/SQLiteOpenHelper/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>710</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>160</y>
+      <w>80</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>160</y>
+      <w>80</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>450</y>
+      <w>180</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>450</y>
+      <w>260</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>240.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+</diagram>

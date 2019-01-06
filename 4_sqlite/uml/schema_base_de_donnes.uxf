@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>230</y>
+      <w>210</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>user
+--
+email: Text
+encoded_password: Text
+first_name: Text
+last_name: Text</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>790</x>
+      <y>230</y>
+      <w>210</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>point_of_interest
+--
+title: Text
+description: Text
+lat: Float
+lng: Float
+user_id: Integer</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
