@@ -14,13 +14,13 @@ L'application sera composée d'un écran de connexion (`LoginActivity`), d'un é
 
 ## Mise en place
 
-Créer un nouveau projet appelé `PointsOfInterest` avec une première activité vide nommée `LoginActivity`.
+Créer un nouveau projet appelé `PointsOfInterest` avec une première **activité vide** nommée `LoginActivity`.
 
-Créez ensuite une seconde activité vide nommée `SignInActivity`.
+Créez ensuite une seconde **activité vide** nommée `SignInActivity`.
 
-Créer une troisième activité de type carte nommée `MapsActivity`.
+Créer une troisième **activité de type carte** nommée `MapsActivity`.
 
-Créer enfin une quatrième activité vide nommée `NewPointActivity`.
+Créer enfin une quatrième **activité vide** nommée `NewPointActivity`.
 
 Le TP étant assez long, vous trouvez dans le dossier [ressources](ressources) de ce TP les codes XML des fichiers `layout` et du fichier `strings.xml`. Cela vous permet de copier-coller l'interface afin de ne pas perde du temps à la faire.
 
@@ -32,9 +32,10 @@ Le TP étant assez long, vous trouvez dans le dossier [ressources](ressources) d
 
 Ajoutez à la classe `LoginActicity` :
 * des attributs pour les composants graphiques à gérer sur cette fenêtre (voir le layout) ;
-* une méthode `loadComponents` qui va instancier les composants graphiques en objet java ;
-* une méthode `initEventListeners` qui va ajouter les écouteurs d’événements aux composants graphiques
-* deux écouteurs d’événement : `b_loginListener` et `b_signInListener`...
+* l'instanciation de ces composants graphiques en objet java ;
+* l'ajout des écouteurs d'événements :
+    * sur le bouton "login" qui appelle la méthode `tryLogin` ;
+    * sur le bouton "sign in" pour appeler la méthode `openSignInActivity` ;
 
 Voir rappel si besoin : [Rappel - Les activités](../7_resume#les-activités)
 
@@ -46,40 +47,51 @@ Lorsque l'utilisateur n'a pas de compte il va appuyer sur le bouton "Sign in" po
 
 Il va alors falloir ouvrir l'activité `SignInActivity` qui lui permettra de s'enregistrer.
 
-Pour ouvrir une autre activité, on utilise un Intent, cela permet également de transmettre des informations :
+Pour ouvrir une autre activité, on utilise un `Intent`, cela permet également de transmettre des informations :
 
 ```java
-        String email, password;
+    // Instanciation du champ email en "et_email" (onClick)
 
-        // Récupération de l'email et du password
-        
+    private void openSignInActivity() {
+        String email = et_email.getText().toString();
+
         // Create intent
         Intent intent = new Intent(this, SignInActivity.class);
 
         // Put extra
         intent.putExtra(Constants.EXTRA_EMAIL, email);
-        intent.putExtra(Constants.EXTRA_PASSWORD, password);
 
         // Start activity
         startActivity(intent);
-```
-
-On suppose ici qu'on récupère le mail et le mot de passe tapés par l'utilisateur et on les transmet à l'autre activité pour faire gagner du temps à un utilisateur distrait qui aurait déjà tapé ces informations...
-
-Vous pouvez noter que comme dans le TD précédent, nous allons ajouter une classe pour stocker les clés utilisées par les extra. Cela doit être des  `public static String`.
-
-Maintenant, quand notre activité d'inscription s'ouvrir, il faudra qu'elle récupère les informations qui lui ont été transmises :
-
-```java
-    // Dans la fonction onCreate
-    Intent intent = getIntent();
-    if (intent != null) {
-        String email = intent.getStringExtra(Constants.EXTRA_EMAIL);
-        String password = intent.getStringExtra(Constants.EXTRA_PASSWORD);
     }
 ```
 
-Ajoutez également les fonctions `loadComponents` et `initEventListeners` sur la classe SignInActivity et des attributs `TextEdit` et `Button` pour les composants graphiques.
+On suppose ici qu'on récupère le mail tapé par l'utilisateur et on le transmet à l'autre activité pour faire gagner du temps à un utilisateur distrait qui l'aurait déjà tapé...
+
+Vous pouvez noter que comme dans le TD précédent, nous allons ajouter une classe pour stocker les clés utilisées par les extra. Cela doit être des `public static String`.
+
+Maintenant, quand notre activité d'inscription s'ouvrir, il faudra qu'elle récupère l'information qui lui a été transmise :
+
+```java
+    // Dans la fonction onCreate - SignInActivity
+    Intent intent = getIntent();
+    if (intent != null) {
+        String email = intent.getStringExtra(Constants.EXTRA_EMAIL);
+        // Modifier le champs et_email en conséquence...
+    }
+```
+
+Ajoutez également les attributs pour les composants graphiques, instanciez-les et ajoutez des écouteurs d'événements (le bouton `b_sign_in` exécutera la fonction `signIn` qui sera complétée plus tard).
+
+#### Test première partie
+
+A ce stage, votre application doit s'ouvrir sur une page login et être capable d'afficher la page sign in.
+
+Vous pouvez complétez les fonctions `signIn` et `tryLogin` par un `Toast` pour tester le reste de l'interface :
+
+```java
+Toast.makeText(this, "tryLogin", 2000).show();
+```
 
 On a fait le plus gros du code de base. Il est temps maintenant de s'attaquer à la base de données.
 
@@ -108,16 +120,18 @@ Voici le schéma UML d'illustration :
 
 Commencez par créer deux packages : `dataaccess` et `dataobject`. Ils regroupent respectivement tout ce qui touche au stockage (accès) des données et tout ce qui touche aux objets métier.
 
-Créer les classes vides dans un premier temps :
+Créez les classes vides dans un premier temps :
 
 ![Classes vides](screens/1_classes_1.png)
 
 #### b) Classes métier
 
-Ensuite ajoutez les attributs (en `private`) aux classes métier :
+Ensuite ajoutez les attributs (en `private`) et les constructeurs aux classes métier (ne créez pas encore les « getter » et les « setter ») :
 
 ```java
 package fr.ign.vsasyan.pointsofinterest.dataobject;
+
+import java.io.Serializable;
 
 public abstract class DataBaseObject implements Serializable {
     protected Long id;
@@ -145,7 +159,6 @@ public class PointOfInterest extends DataBaseObject {
         setUserId(userId);
     }
 }
-
 ```
 
 ```java
@@ -173,7 +186,7 @@ Nous avons terminé la partie métier.
 
 #### c) Classes DataBaseHelper
 
-Cette classe permet d’initialiser la création de la base de données. Elle va également permet de tenir le schéma à jour lorsqu'il y a des modifications.
+Cette classe permet d’initialiser la création de la base de données. Elle va également permet de tenir le schéma à jour lorsque il y a des modifications.
 
 Voici le code de base à utiliser :
 
@@ -193,14 +206,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
+    @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_USER);
         db.execSQL(SQL_CREATE_POINT_OF_INTEREST);
         // Pour le début, ajoute des poi au premier utilisateur...
-        db.execSQL("INSERT INTO point_of_interest(title, description, lat, lng, user_id) VALUES ('ENSG', '', 48.8410201, 2.5872416, 1);");
+        db.execSQL("INSERT INTO point_of_interest(title, description, lat, lng, user_id) VALUES ('ENSG', 'La meilleur école d''ingénieurs en géomatique du monde', 48.8410201, 2.5872416, 1);");
         db.execSQL("INSERT INTO point_of_interest(title, description, lat, lng, user_id) VALUES ('Ecole des ponts', '', 48.8410536, 2.587911, 1);");
         db.execSQL("INSERT INTO point_of_interest(title, description, lat, lng, user_id) VALUES ('IFTAR', '', 48.8423652, 2.5874393, 1);");
     }
+
+    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_USER);
         db.execSQL(SQL_DELETE_POINT_OF_INTEREST);
@@ -262,16 +279,16 @@ public abstract class DAO<T> {
 
 Nous ajoutons aussi un attribut `SQLiteDatabase db;` qui représente la base de données et un constructeur.
 
-Vous pouvez maintenant ouvrir les autres classes de DAO. Nous allons les modifier en disant qu'elle sont des spécialisations de la classe DAO appliquées à des classes en particulier.
+Vous pouvez maintenant ouvrir les autres classes de DAO. Nous allons les modifier en disant qu'elles sont une **spécialisation** de la classe DAO **appliquée à une classe en particulier** (`T`).
 
-UserDAO est une spécialisation de DAO<T> appliquée à la classe User :
+`UserDAO` est une spécialisation de `DAO<T>` appliquée à la classe `User` :
 
 ```java
 public class UserDAO extends DAO<User> {
 }
 ```
 
-PointOfInterestDAO est une spécialisation de DAO<T> appliquée à la classe PointOfInterest :
+`PointOfInterestDAO` est une spécialisation de `DAO<T>` appliquée à la classe `PointOfInterest` :
 
 ```java
 public class PointOfInterestDAO extends DAO<PointOfInterest> {
@@ -286,7 +303,7 @@ Il suffit de faire `Alt+Inser` et de choisir « Implements methods » pour qu'An
 
 ![Voici ces méthodes](screens/1_classes_3.png)
 
-Elles sont toutes sélectionnées par défaut car toutes obligatoires : notre classe hérite de la classe abstraite `DAO` et doit donc en implémenter toutes les méthodes abstraite.
+Elles sont toutes sélectionnées par défaut car toutes obligatoires : notre classe hérite de la classe abstraite `DAO` et doit donc en implémenter toutes les méthodes abstraites.
 
 Recommençons avec le constructeur : `Alt+Inser` => « Constructor ».
 
@@ -410,34 +427,39 @@ Il va falloir agir sur l'attribut db pour accéder à la base :
         );
 
         if (cursor.moveToFirst()) {
-            return new User(cursor);
+            Long id = cursor.getLong(cursor.getColumnIndex("id"));
+            String first_name = cursor.getString(cursor.getColumnIndex("first_name"));
+            String last_name = cursor.getString(cursor.getColumnIndex("last_name"));
+            return new User(id, email, encodesPassword, first_name, last_name);
         }
 
         return null;
     }
 ```
 
-Nous allons ajouter un constructeur pour User à base d'un `cursor` :
+Nous allons ajouter un constructeur pour User quand il y a également l'id :
 
 ```java
-    public User(Cursor cursor) {
-        super(cursor);
-        setEmail(cursor.getString(cursor.getColumnIndex("email")));
-        setEncodedPassword(cursor.getString(cursor.getColumnIndex("encoded_password")));
-        setFirstName(cursor.getString(cursor.getColumnIndex("first_name")));
-        setLastName(cursor.getString(cursor.getColumnIndex("last_name")));
+    public User(Long id, String email, String encodedPassword, String firstName, String lastName) {
+        super(id);
+        setEmail(email);
+        setEncodedPassword(encodedPassword);
+        setFirstName(firstName);
+        setLastName(lastName);
     }
 ```
 
-Et ajouter le constructeur dans la classe parente (`DataBaseObject`) :
+Et ajouter un constructeur avec l'identifiant dans la classe parente (`DataBaseObject`) :
 
 ```java
-    DataBaseObject(Cursor cursor) {
-        setId(cursor.getLong(cursor.getColumnIndex("id")));
+    DataBaseObject(Long id) {
+        setId(id);
     }
 ```
 
-Vous pouvez compléter de même ce qui concerne les points d’intérêt, avec cette fois-ci une fonction `ArrayList<PointOfInterest> findByUserId(Long user_id)`.
+Vous pouvez compléter de même ce qui concerne les points d’intérêt, avec cette fois-ci une fonction `ArrayList<PointOfInterest> findByUserId(Long user_id)` : nous récupérons tous les points d'intérêt associés à un utilisateur.
+
+Il faut utiliser une boucle `while` pour boucler sur le curseur tant qu'il est possible de paser à la ligne suivante (`moveToNext`).
 
 ### 3) Utilisation de la base de données
 
@@ -446,7 +468,8 @@ Au démarrage des activités, nous allons :
 * récupérer l'objet `SQLiteDatabase`,
 * récupérer les DAO.
 
-````java
+```java
+        // Instantiation des attributs concernants la gestion de la base de données (méthode onCreate)
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
         db = dataBaseHelper.getWritableDatabase();
         userDAO = new UserDAO(db);
@@ -456,6 +479,7 @@ Au démarrage des activités, nous allons :
 Ici les variables : `db`, `userDAO` et `pointOfInterestDAO` sont des attributs de classe :
 
 ```java
+    // Attributs de classe concernant la gestion de base de données
     SQLiteDatabase db;
     UserDAO userDAO;
     PointOfInterestDAO pointOfInterestDAO;
@@ -467,11 +491,11 @@ Dans la fonction `tryLogin`, il suffit de récupérer les données entrées par 
 
 ```java
     public void tryLogin() {
-        String email, password;
-        email = et_email.getText().toString();
-        password = et_password.getText().toString();
+        String email = et_email.getText().toString();
+        String password = et_password.getText().toString();
+        String encoded_password = password; // On ne hash pas le password...
 
-        User user = userDAO.findByEmailAndEncodedPassword(email, password);
+        User user = userDAO.findByEmailAndEncodedPassword(email, encoded_password);
 
         if (user != null) {
             openMapsActivity(user);
@@ -481,7 +505,7 @@ Dans la fonction `tryLogin`, il suffit de récupérer les données entrées par 
     }
 ```
 
-Il faut créer une fonction `openMapsActivity(User user)` qui ouvre l'activité carte et affiche les points d'intérêt de l'utilisateur. Passez l’utilisateur en extra de l'intent.
+Il faut modifier la fonction `openMapsActivity(User user)` qui doit ouvrir l'activité carte et afficher les points d'intérêt de l'utilisateur. Passez l’utilisateur en extra de l'intent.
 
 Vous pouvez mettre et récupérer n'importe quel objet `Serializable` dans les extra d'un intent :
 
@@ -498,12 +522,14 @@ Note : nos `User` sont bien `Serializable` car ils héritent de la classe `DataB
 
 Complétez la fonction pour s'inscrire.
 
-#### c) Activité de carte
+Une fois l'utilisateur inscrit, vous pouvez fermer l'activité et revenir à la précédente en utilisant la fonction `finish()` de l'activité à fermer.
+
+#### c) Activité carte
 
 Fonctionnalités :
-* récupérer les points d'intérêt de l’utilisateur ;
-* afficher les points sur la carte ;
-* localiser l’utilisateur en arrière plan et lui permettre de saisir des points d'intérêt géolocalisés.
+* récupérez l'utilisateur passé en `Intent` (`onCreate`) ;
+* récupérez et afficher les points d'intérêt de l’utilisateur (sous fonction appellée dans `onResume` et `onMapReasy`) ;
+* localisez l’utilisateur en arrière plan et lui permettre de saisir des points d'intérêt géolocalisés.
 
 Pour permettre à l'utilisateur d'ajouter des points d'intérêt, il va falloir ajouter un menu avec un item « Ajouter un point d'intérêt ».
 
@@ -554,7 +580,8 @@ Voici le code XML à utiliser :
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_item_add_point"
+    <item
+        android:id="@+id/menu_item_add_point"
         android:title="@string/add_point"/>
 </menu>
 ```
@@ -565,11 +592,15 @@ Le géo-positionnement se ferait donc dans la `MapsActivity` (par exemple).
 
 ## Les points à retenir
 
-Les `Intent` permettent également de démarrer une nouvelles activité en leur transmettant des données.
+Les `Intent` permettent également de démarrer une nouvelle activité en leur transmettant des données.
 
-La classe DataBaseHelper permet de créer le schéma de votre base de donnée et de le tenir à jour.
+La classe `DataBaseHelper` permet de créer le schéma de votre base de donnée et de le tenir à jour.
 
 Les `design pattern` permettent de mieux organiser votre code.
+
+## Jamais fini !
+
+Vous pouvez ajouter une activité pour visualiser/éditer un point après avoir cliqué dessus sur la carte...
 
 ## Projet complet
 
