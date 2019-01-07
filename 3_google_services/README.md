@@ -266,6 +266,23 @@ Attention, la dépendance `com.google.android.gms:play-services`, si elle est pr
 
 Synchronisez Gradle.
 
+**Note :**
+
+Il semblerait dans certains cas qu'il y est un message d'avertissement à la ligne `implementation 'com.android.support:appcompat-v7:28.0.0'`.
+
+Cela est dû à d'autres classes du package `com.android.support` qui sont importées dans une version différente (par d'autres packages).
+
+Il suffit de forcer leur importation dans la même version :
+
+```js
+dependencies {
+    // ...
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-media-compat:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+}
+```
+
 #### a) Première méthode
 
 Ajoutez un `FusedLocationProviderClient` en attribut de classe permettant d'accéder à l'API :
