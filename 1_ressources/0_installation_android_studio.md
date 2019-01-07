@@ -86,3 +86,10 @@ Avant de créer un premier projet, nous allons configurer un peu plus Android st
 ![Proxy](screens/0_config_avancee_3.png)
 
 4. Cliquez sur OK et confirmez.
+
+
+### Ajout d'un lanceur
+
+Vous pouvez ajouter un lanceur (pour ne plus avoir à lancer Android Studio en ligne de commande) en fraisant : `Tools` => `Create Desktop Entry...` :
+
+![Desktop Entry](screens/0_config_avancee_4.png)
