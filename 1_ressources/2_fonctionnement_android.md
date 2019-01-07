@@ -183,7 +183,7 @@ Exemple en JavaScript :
     var bouton = document.getElementById("bouton");
     
     // Ajout d'un écouteur au bouton associé à l'événement "click"
-    el.addEventListener("click", deconnecterUtilisateur);
+    bouton.addEventListener("click", deconnecterUtilisateur);
 ```
 
 Le principe en Java est exactement le même (sauf qu'en Java tout est objet, on ne donne donc pas une *fonction* à exécuter mais un *objet* dont une des méthodes sera exécutée).

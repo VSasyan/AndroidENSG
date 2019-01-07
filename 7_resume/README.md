@@ -93,7 +93,7 @@ Exemple :
 
 ### Les activités
 
-Ce sont des classes Java comme les autres. Elles permettent à l'utilisateur d’interagir avec le programme. Pour cela, vous devrez instancier les composants en objets Java.
+Ce sont des classes Java classiques mais elles permettent en plus de gérer l'interface avec l'utilisateur. Pour cela, vous devrez instancier les composants en objets Java.
 
 Je vous conseil de **toujours** utiliser cette structure :
 
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         // Génération de la réponse :
         String réponse = String.format(réponse_brute, date.getDate());
 
-        // Affichage de la réponse via en utilisant un composant graphique TextView :
+        // Affichage de la réponse en utilisant un composant graphique TextView :
         showDay.setText(réponse);
     }
 
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
 ### Ressources (Gradle)
 
-Pour rappel :Gradle est l'outil qui, dans Android Studio, gère les dépendances et les ressources de votre programme. S'il y a un problème dans Gradle, c'est que vos ressources ne sont pas valides ou qu'une dépendance est mal gérée.
+Pour rappel : Gradle est l'outil qui gère les dépendances et les ressources de votre programme. S'il y a un problème dans Gradle, c'est que vos ressources ne sont pas valides ou qu'une dépendance est mal gérée.
 
 Dans ces cas là, vous verrez en général le `R` de la classe ressource en rouge :
 
