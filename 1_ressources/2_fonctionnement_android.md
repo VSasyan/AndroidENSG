@@ -31,6 +31,10 @@ Il n'y a pas que les SDK principaux, mais également d'autres outils (comme par 
 
 Gradle gère les dépendances et la compilation de votre projet. Gradle effectue régulièrement des synchronisations il faut attendre qu'elles soient terminées pour modifier votre code (notamment au début).
 
+Vous pouvez resynchroniser Gradle en cliquant sur le bouton (la position du bouton peut changer) :
+
+![Sync Gradle](screens/2_sync_gradle.png)
+
 Le fichier de configuration principal de Gradle pour votre application est `Gradle Scripts/build.gradle (Module: app)`. Exemple de fichier :
 
 ```js
