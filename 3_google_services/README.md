@@ -258,11 +258,11 @@ En premier lieu, ajoutez une dépendance dans le fichier de configuration de Gra
 ```js
 dependencies {
     // ...
-    compile 'com.google.android.gms:play-services-location:11.0.1'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
 }
 ```
 
-Attention, la dépendance `com.google.android.gms:play-services`, si elle est présente, doit avoir la même version (donc ici `11.0.1`).
+Attention, la dépendance `com.google.android.gms:play-services`, si elle est présente, doit avoir la même version (donc ici `16.0.0`).
 
 Synchronisez Gradle.
 
