@@ -237,7 +237,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_USER);
         db.execSQL(SQL_CREATE_POINT_OF_INTEREST);
         // Pour le début, ajoute des poi au premier utilisateur...
-        db.execSQL("INSERT INTO point_of_interest(title, description, lat, lng, user_id) VALUES ('ENSG', 'La meilleur école d''ingénieurs en géomatique du monde', 48.8410201, 2.5872416, 1);");
+        db.execSQL("INSERT INTO point_of_interest(title, description, lat, lng, user_id) VALUES ('ENSG', 'La meilleure école d''ingénieurs en géomatique du monde', 48.8410201, 2.5872416, 1);");
         db.execSQL("INSERT INTO point_of_interest(title, description, lat, lng, user_id) VALUES ('Ecole des ponts', '', 48.8410536, 2.587911, 1);");
         db.execSQL("INSERT INTO point_of_interest(title, description, lat, lng, user_id) VALUES ('IFTAR', '', 48.8423652, 2.5874393, 1);");
     }
