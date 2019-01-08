@@ -136,7 +136,13 @@ import java.io.Serializable;
 public abstract class DataBaseObject implements Serializable {
     protected Long id;
 
-    DataBaseObject() {} // Default constructor
+    // Default constructor
+    DataBaseObject() {}
+
+    // Constructor
+    DataBaseObject(Long id) {
+        setId(id)
+    }
 }
 ```
 
@@ -150,8 +156,18 @@ public class PointOfInterest extends DataBaseObject {
     private Double lng;
     private Long userId;
 
-    // Constructor
+    // Default Constructor
     public PointOfInterest(String title, String description, Double lat, Double lng, Long userId) {
+        setTitle(title);
+        setDescription(description);
+        setLat(lat);
+        setLng(lng);
+        setUserId(userId);
+    }
+
+    // Constructor
+    public PointOfInterest(Long id, String title, String description, Double lat, Double lng, Long userId) {
+        super(id);
         setTitle(title);
         setDescription(description);
         setLat(lat);
@@ -170,8 +186,17 @@ public class User extends DataBaseObject {
     private String firstName;
     private String lastName;
 
-    // Constructor
+    // Default Constructor
     public User(String email, String encodedPassword, String firstName, String lastName) {
+        setEmail(email);
+        setEncodedPassword(encodedPassword);
+        setFirstName(firstName);
+        setLastName(lastName);
+    }
+
+    // Constructor
+    public User(Long id, String email, String encodedPassword, String firstName, String lastName) {
+        super(id);
         setEmail(email);
         setEncodedPassword(encodedPassword);
         setFirstName(firstName);
