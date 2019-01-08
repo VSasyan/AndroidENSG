@@ -66,7 +66,7 @@ La différence entre la mémoire publique référencée et la non référencée 
 
 ### 3) Préparation de l'application
 
-Ajoutez un bouton `b_take_picture` à l'application, ainsi que les fonctions habituelles `loadComponents` et `initEventListeners` afin de lui associer un écouteur d’événement qui appellera une fonction `startPictureIntent`.
+Ajoutez un bouton `b_take_picture` à l'application, ainsi que les attributs stockants les composants graphiques, leur instanciation et l'ajout des écouteurs d'événements (appel d'une fonction `startPictureIntent` au clic bouton).
 
 ### 4) `startPictureIntent`
 
