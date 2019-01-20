@@ -20,7 +20,7 @@ L'application sera composée d'un écran de bienvenue (`MainActivity`) et d'une 
 
 ## Mise en place
 
-Créer un nouveau projet appelé `GeoPicture` avec une première activité `de type *Basic Activity* nommée `MainActivity`.
+Créer un nouveau projet appelé `GeoPicture` avec une première activité de type *Basic Activity* nommée `MainActivity`.
 
 Créer une autre activité de type *maps* nommée `MapsActivity`.
 
@@ -45,20 +45,20 @@ Notes :
 
 ### 2) Chemin d'accès
 
-Il y a au total *trois* accès possibles :
+Nous verrons *trois* accès possibles :
 * celui de la mémoire privée réservée à cette application ;
 * celui de la mémoire publique accessible à toutes les applications (mais pas référencée pour l'utilisateur) ;
 * celui de la mémoire publique accessible à toutes les applications (et référencée pour l'utilisateur).
 
 Voici les fonctions à appeler (respectivement pour l'accès privé, l'accès public non référencé et l'accès public référencé) :
-* [`File getFilesDir();`](https://developer.android.com/reference/android/os/Environment.html#getFilesDir(java.lang.String)) ;
-* [`File getExternalFilesDir(String name);`](https://developer.android.com/reference/android/os/Environment.html#getExternalFilesDir(java.lang.String)) ;
-* [`File getExternalStoragePublicDirectory(String name);`](https://developer.android.com/reference/android/os/Environment.html#getExternalStoragePublicDirectory(java.lang.String)).
+* [`File getFilesDir();`](https://developer.android.com/reference/android/content/Context#getFilesDir()) ;
+* [`File getExternalFilesDir(String name);`](https://developer.android.com/reference/android/content/Context#getExternalFilesDir(java.lang.String)) ;
+* [`File getExternalStoragePublicDirectory(String name);`](https://developer.android.com/reference/android/os/Environment#getExternalStoragePublicDirectory(java.lang.String)).
 
 Les deux dernières fonctions prennent un argument de type `String` qui doit être :
-* [DIRECTORY_PICTURES](https://developer.android.com/reference/android/os/Environment.html#DIRECTORY_PICTURES) ;
-* [DIRECTORY_MUSIC](https://developer.android.com/reference/android/os/Environment.html#DIRECTORY_MUSIC) ;
-* [etc](https://developer.android.com/reference/android/os/Environment.html)...
+* [DIRECTORY_PICTURES](https://developer.android.com/reference/android/os/Environment#DIRECTORY_PICTURES) ;
+* [DIRECTORY_MUSIC](https://developer.android.com/reference/android/os/Environment#DIRECTORY_MUSIC) ;
+* [etc](https://developer.android.com/reference/android/os/Environment)...
 
 Cela permet d'obtenir directement un dossier adapté au type de fichier que l'on souhaite sauvegarder.
 
@@ -66,7 +66,7 @@ La différence entre la mémoire publique référencée et la non référencée 
 
 ### 3) Préparation de l'application
 
-Ajoutez un bouton `b_take_picture` à l'application, ainsi que les attributs stockants les composants graphiques, leur instanciation et l'ajout des écouteurs d'événements (appel d'une fonction `startPictureIntent` au clic bouton).
+Ajoutez un bouton `b_take_picture` à l'application, ainsi que les attributs stockant les composants graphiques, leur instanciation et l'ajout des écouteurs d'événements (appel d'une fonction `startPictureIntent` au clic bouton).
 
 ### 4) `startPictureIntent`
 
@@ -91,14 +91,14 @@ C'est pour cela que l'on utilise la fonction `resolveActivity` : elle permet de 
 
 ### 5) `onActivityResult`
 
-Pour récupérer le résultat de notre appel, il faut ajouter une fonction `void onActivityResult(int requestCode, int resultCode, Intent data)`.
+Pour récupérer le résultat de notre appel, il faut ajouter une fonction `protected void onActivityResult(int requestCode, int resultCode, Intent data)`.
 
 La fonction permet de récupérer un aperçus de l'image prise :
 
 ```java
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        if (requestCode == Constants.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             // Get result
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
@@ -113,7 +113,7 @@ La fonction récupère la donnée si le résultat est positif (l'utilisateur a p
 
 Comme vous pouvez le voir, l'`Intent` ne retourne qu'un aperçu... Pour effectivement sauvegarder l'image, il faut créer un fichier dont on passera l'adresse en extra à l'`Intent`.
 
-(A ce stade, lancer l'application pour vérifier qu'elle affiche bien un `Toast` avec les dimension de l'aperçu.)
+(A ce stade, lancez l'application pour vérifier qu'elle affiche bien un `Toast` avec les dimensions de l'aperçu.)
 
 ### 6) L'image complète
 
@@ -126,7 +126,7 @@ Cette fonction va créer le fichier (il faut ajouter un `String mCurrentPhotoPat
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalStoragePublicDirectory(DIRECTORY_PICTURES);
         File image = File.createTempFile(
-            imageFileName,  /* prefix */
+            imageFileName,  /* file */
             ".jpg",         /* suffix */
             storageDir      /* directory */
         );
@@ -137,7 +137,14 @@ Cette fonction va créer le fichier (il faut ajouter un `String mCurrentPhotoPat
     }
 ```
 
-En suite nous allons modifier le code de la fonction `startPictureIntent` :
+Note : importez les packages :
+
+```java
+import java.text.SimpleDateFormat;
+import java.util.Date;
+```
+
+Ensuite, nous allons modifier le code de la fonction `startPictureIntent` :
 
 ```java
     private void startPictureIntent() {
@@ -156,7 +163,7 @@ En suite nous allons modifier le code de la fonction `startPictureIntent` :
                 // Continue only if the File was successfully created
                 Uri photoURI = FileProvider.getUriForFile(this, getString(R.string.file_provider_authority), photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                startActivityForResult(takePictureIntent, Constants.REQUEST_IMAGE_CAPTURE);
             } else {
                 // Else be sure to erase the path
                 mCurrentPhotoPath = null;
@@ -176,7 +183,12 @@ Cette manière de faire permet d'autoriser l'application photo que l'on utilise 
 Il faut configurer ce `FileProvider` en ajoutant au fichier `AndroidManifest.xml` :
 
 ```xml
+<!-- ... -->
+
 <application>
+    
+    <!-- ... -->
+
     <provider
         android:name="android.support.v4.content.FileProvider"
         android:authorities="@string/file_provider_authority"
@@ -186,6 +198,7 @@ Il faut configurer ce `FileProvider` en ajoutant au fichier `AndroidManifest.xml
             android:name="android.support.FILE_PROVIDER_PATHS"
             android:resource="@xml/file_paths"></meta-data>
     </provider>
+
 </application>
 ```
 
@@ -202,9 +215,19 @@ Vous voyez également que le bout de code fait référence à une ressource `@xm
 </paths>
 ```
 
+Il faut créer un nouveau dossier de ressources :
+* clic-droit sur le dossier `res` ;
+* New => Android Resources Directory ;
+* nommez-le `xml`.
+
+Puis lui ajouter un fichier de ressources :
+* clic-droit sur le dossier `xml` crée ;
+* New => XML Resources File ;
+* nommez-le `file_paths`.
+
 **Ligne *4*, mettez bien à jour l'attribut `path` pour qu'il corresponde au package de votre application !**
 
-Ce document donne la liste des répertoires où doit se trouver le fichier rendu accessible au moment de l'`Intent`. Le chemin change selon l'endroit où vous enregistrez le fichier (voir [2) Chemin d'accès]()), j'ai donc ajoutez tous les chemins possibles si besoin.
+Ce document donne la liste des répertoires où doit se trouver le fichier rendu accessible au moment de l'`Intent`. Le chemin change selon l'endroit où vous enregistrez le fichier (voir [2) Chemin d'accès](#2-chemin-daccès)), j'ai donc ajouté tous les chemins possibles si besoin.
 Vous pouvez vous amuser à changer la fonction appelée (dans votre méthode `createImageFile`) et commenter la ligne associée (dans le fichier `file_paths.xml`), vous verrez alors que ça plante au niveau de `FileProvider.getUriForFile`.
 
 Il faut maintenant modifier la fonction `onActivityResult` car il n'y aura plus d'`Intent` retourné :
@@ -212,7 +235,7 @@ Il faut maintenant modifier la fonction `onActivityResult` car il n'y aura plus 
 ```java
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        if (requestCode == Constants.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             // On a data == null car ou on récupère une miniature, ou on enregistre la photo, mais on ne peut pas faire les deux...
             // Mais resultCode == RESULT_OK donc la photo est bien sauvegardée
             // Ajoutons l'image à la Galerie
@@ -231,14 +254,14 @@ Il faut maintenant modifier la fonction `onActivityResult` car il n'y aura plus 
 
 ### 6) Ajoutons un peu de Géomatique
 
-Maintenant nous allons supposer que notre application localisait l'utilisateur en arrière plan ([Voir TD 3](../3_google_services/)) et qu'il y a deux attributs `Double lat, lng;` comme attribut de classe.
+Maintenant nous allons supposer que notre application localisait l'utilisateur en arrière plan ([Voir TD 3](../3_google_services/)) et qu'il y a deux attributs `Double lat, lng;` comme attributs de classe.
 
 Nous pouvons modifier la fonction `onActivityResult` pour qu'elle ajoute la position GPS au fichier :
 
 ```java
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        if (requestCode == Constants.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             // Ajoutons l'image à la Galerie
             galleryAddPic();
             // Ajoutons des info de position
@@ -315,4 +338,4 @@ Vous pouvez sauver des fichiers :
 
 ## Projet complet
 
-Vous pouvez retrouver le projet complet ici : [https://gitlab.com/vsasyan/GeoPicture](https://gitlab.com/vsasyan/GeoPicture)
+Vous pouvez retrouver le code de prise de photo ici : [https://gitlab.com/vsasyan/GeoPicture](https://gitlab.com/vsasyan/GeoPicture)
