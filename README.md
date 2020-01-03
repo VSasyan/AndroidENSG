@@ -1,4 +1,5 @@
-# Cours d'Android 2019
+# Cours d'Android 2020
+
 
 ## Introduction
 
@@ -13,6 +14,7 @@
 
 [Plan du cours](plan_du_cours.pdf) (une reformulation de ce document avec des images mais pas de liens...)
 
+
 ## [Ressources](0_ressources)
 
 Cette première partie regroupe tous les documents explicatifs : les présentations vues en cours et des documents à lire de votre côté qui détaillent un peu plus.
@@ -21,12 +23,13 @@ Cette première partie regroupe tous les documents explicatifs : les présentati
 * [Installation d'Android Studio](0_ressources/0_installation_android_studio.md) ;
 * [Fonctionnement d'Android](0_ressources/2_fonctionnement_android.md).
 
+
 ## Une première application
 
 Hello World!
 
-
 [Énoncé du TD](1_premiere_application/README.md)
+
 
 ## Une deuxième application
 
@@ -36,21 +39,25 @@ Jetons nous à l'eau !
 
 [Énoncé du TD](2_deuxieme_application/README.md)
 
+
 ## Google Services
 
 Carte, géolocalisation et géo-codage avec les services Google.
 
 [Énoncé du TD](3_google_services/README.md)
 
+
 ## Prise de photo
 
 [Énoncé du TD](4_photo/README.md)
+
 
 ## Utilisation de SQLite
 
 Une base de données pour les stocker toutes.
 
 [Énoncé du TD](5_sqlite/README.md)
+
 
 ## Résumé
 

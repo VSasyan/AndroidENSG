@@ -4,8 +4,6 @@ Pour mettre en pratique l'utilisation d'Android Studio et prendre
 en main un projet Android, nous allons créer une application simulant
 un lancer de pièce (pile ou face).
 
-[Résumé d'introduction](../1_ressources/3_premiere_application.pdf)
-
 ## Objectifs
 
 Il y deux objectifs fondamentaux dans cette partie :
