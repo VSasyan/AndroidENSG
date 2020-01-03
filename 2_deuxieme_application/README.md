@@ -1,4 +1,4 @@
-# Une première application
+# Une deuxième application
 
 Pour mettre en pratique l'utilisation d'Android Studio et prendre
 en main un projet Android, nous allons créer une application simulant
@@ -23,29 +23,7 @@ affiche le label correspondant. L'utilisateur peut effectuer un nouveau lancer e
 
 ## Mise en place
 
-Créez un nouveau projet appelé "TwoSidesOfTheCoin" :
-
-![Écran de création 1/4](screens/1_creation_1.png)
-
-![Écran de création 2/4](screens/1_creation_2.png)
-
-![Écran de création 3/4](screens/1_creation_3.png)
-
-![Écran de création 4/4](screens/1_creation_4.png)
-
-Regardez la structure du projet créé par Android Studio :
-
-![Structure du projet](screens/2_environnement_1_structure.png)
-
-Ouvrez les fichiers `manifest`, `CoinActivity`, et `activity_coin` en mode Design et Text :
-
-![Structure du projet](screens/2_environnement_2_manifest.png)
-
-![Structure du projet](screens/2_environnement_3_CoinActivity.png)
-
-![Structure du projet](screens/2_environnement_4_activity_coin_design.png)
-
-![Structure du projet](screens/2_environnement_5_activity_coin_text.png)
+Créez un nouveau projet appelé "TwoSidesOfTheCoin". Utilisez, de même que pour la première, une activité vide et faites un projet en Java.
 
 
 ## Pas à pas des modifications
@@ -53,48 +31,51 @@ Ouvrez les fichiers `manifest`, `CoinActivity`, et `activity_coin` en mode Desig
 ### 1) Modification de la vue
 
 Dans un premier temps, il faut modifier la vue pour ajouter une zone de texte.
-Modifier le `TextView` automatiquement ajouté par Android Studio : renommez le en `tv_coin_results`, agrandissez-le pour qu'il prenne tout l'espace et videz le texte qu'il contient.
+Modifier le `TextView` automatiquement ajouté par Android Studio : ajoutez-lui l'id `tv_coin_results`.
 
-Vous pouvez effectuer cela en utilisant le mode *Design* qui permet d'éditer facilement les composants graphiques et de modifier les propriétés via le menu de droite. Cependant cette interface est limitée, et il est parfois plus rapide d'utiliser le mode *Text*.
+Vous pouvez effectuer cela en utilisant le mode *Design* (cliquez sur l'élément pour afficher ces attributs à droit) qui permet d'éditer facilement les composants graphiques. Cependant cette interface est limitée, et il est parfois plus rapide d'utiliser le mode *Text*.
 
 Vous devez obtenir le code suivant :
 
 ```xml
-    <TextView
-        android:id="@+id/tv_coin_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true" />
+        <TextView
+            android:id="@+id/tv_coin_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 ```
 
 ### 2) Ajout des labels dans les fichiers strings
 
 Ouvrez le fichier `res/values/string.xml`. Vous pouvez voir qu'il y a déjà une ressource nommée `app_name` ayant pour valeur « TwoSidesOfTheCoin ».
 
-Il faut ajouter deux ressources nommées `tail` et `head` avec pour valeur respective « Tail » et « Head ».
+Il faut ajouter deux ressources nommées `tail` et `head` avec pour valeur respective « Tail » et « Head » :
+
+```xml
+<resources>
+    <string name="app_name">TwoSidesOfTheCoin</string>
+    <string name="tail">Tail</string>
+    <string name="head">Head</string>
+</resources>
+```
 
 ### 3) Modification de l'activité
 
-Nous allons maintenant modifier l'activité (fichier `java/[nom de votre package]/CoinActivity`). Pour rapel la méthode `onCreate` est exécutée à la création de l'activité. Comme cette activité est l'activité de démarrage de l'application, cette fonction sera exécutée sans intervention de l'utilisateur.
+Nous allons maintenant modifier l'activité (fichier `java/[nom de votre package]/MainActivity`). Pour rappel la méthode `onCreate` est exécutée à la création de l'activité. Comme cette activité est l'activité de démarrage de l'application, cette fonction sera exécutée sans intervention de l'utilisateur.
 
-Vous pouvez voir qu'il y a deux lignes dans la fonction, elles permettent d'afficher la vue. Vous devez effectuer vos modifications après.
+Vous pouvez voir qu'il y a deux lignes dans la fonction, celles qui permettent d'afficher la vue (voir [premier précédent](../1_premiere_application/README.md)). Vous devez effectuer vos modifications après.
 
-On va ajouter une méthode à la classe, nommée `coinFlip` qui va simuler le lancement de la pièce, puis afficher « Tail » ou « Head » dans le `TextView`.
+On va ajouter une méthode à la classe, nommée `coinFlip` qui va simuler le lancement de la pièce, puis ajouter « Tail » ou « Head », à la ligne, dans le `TextView`.
 
 #### a) Lancement de la pièce
 
 ```java
-// Voici comment générer aléatoirement un booléen en java :
+// Random generation of a boolean in Java
 Random randomGenerator = new Random();
 boolean random = randomGenerator.nextBoolean();
 
-// Voici comment récupérer les labels créés précédemment :
-String tail = getResources().getString(R.string.tail);
-String head = getResources().getString(R.string.head);
+// Get labels in the resources
+String tail = getString(R.string.tail);
+String head = getString(R.string.head);
 
 // String result = tail ou head ?
 ```
@@ -109,19 +90,36 @@ Cela s'effectue grâce à la fonction `findViewById([ressource_id])` qui prend c
 Il faut donc déclarer votre variable (comme attribut de classe) :
 
 ```java
+public class MainActivity extends AppCompatActivity {
+
+    // Declaration of the class attribute to store the Java instance of the TextView
     TextView tv_coinResult;
+
+    // ...
+}
 ```
 
 Puis instancier l'élément (dans la fonction `onCreate`) :
 
 ```java
-    tv_coinResult = (TextView)findViewById(R.id.tv_coin_result);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // ...
+
+        // Retrieve the TextView and store it in the class attribute
+        tv_coinResult = findViewById(R.id.tv_coin_result);
+    }
 ```
 
 Enfin il suffit de définir le texte de notre `TextView` (dans la méthode `coinFlip`) :
 
 ```java
-    tv_coinResult.setText(result);
+    protected void coinFlip() {
+        // ...
+
+        // Set TextView text
+        tv_coinResult.setText(result);
+    }
 ```
 
 
@@ -129,37 +127,39 @@ Voici la fonction `coinFlip` à obtenir :
 
 ```java
     public void coinFlip() {
-        // Creation of a randomGenerator
+        // Random generation of a boolean in Java:
         Random randomGenerator = new Random();
+        boolean random = randomGenerator.nextBoolean();
 
-        // Tail or not Tail that is the question?
-        boolean tail = randomGenerator.nextBoolean();
+        // Get labels in the resources:
+        String tail = getString(R.string.tail);
+        String head = getString(R.string.head);
 
-        // Put the result in a string
+        // Result according to the random value
         String result;
-        if (tail) {
-            result = getResources().getString(R.string.tail);
+        if (random) {
+            result = tail;
         } else {
-            result = getResources().getString(R.string.head);
+            result = head;
         }
 
-        // Set the result
+        // Set TextView text
         tv_coinResult.setText(result);
     }
 ```
 
-Il faut en suite d'appeler cette fonction dans la fonction `onCreate` (après avoir instancier le `TextView`) :
+Il faut en suite appeler cette fonction dans la fonction `onCreate` (après avoir instancier le `TextView`) :
 
 ```java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coin);
+        setContentView(R.layout.activity_main);
 
-        // I - Instanciation les objets Java représentant les composants graphiques
-        tv_coinResult = (TextView)findViewById(R.id.tv_coin_result);
+        // I - Retrieve the graphical components
+        tv_coinResult = findViewById(R.id.tv_coin_result);
 
-        // III - Autre traitement à effectuer au début...
+        // III - Run other stuff
         coinFlip();
     }
 ```
@@ -169,15 +169,12 @@ Il faut en suite d'appeler cette fonction dans la fonction `onCreate` (après av
 La ligne la plus importante est :
 
 ```java
-        // I - Instanciation les objets Java représentant les composants graphiques
-        tv_coinResult = (TextView)findViewById(R.id.tv_coin_result);
+        // Retrieve the TextView and store it in the class attribute
+        tv_coinResult = findViewById(R.id.tv_coin_result);
 ```
 
 Cette ligne permet d'instancier en Java l'objet `TextView` correspondant au code XML écrit à l'étape **1)**.
 La fonction `findViewById` de signature `View findViewById(String id)` est fournie par l'API d'Android. Elle permet de récupérer n'importe quel élément d'une vue et d'en faire un objet Java. Cela permet de pouvoir agir sur l'objet via une fonction Java.
-
-La fonction renvoie un objet `View`. Or tous les éléments que l'on peut afficher héritent de l'objet `View`.
-On doit donc *caster* l'objet (en ajoutant le `(TextView)`), ce qui revient à préciser à Java que l'objet est un `TextView` et non autre chose (`EditText`, `Button`, ...).
 
 Extrait du diagramme UML des composants graphiques :
 
@@ -203,32 +200,28 @@ Vous utilisez des librairies, il faut donc les importer (Android Studio arrive t
 Connectez votre téléphone à l'ordinateur et lancez le programme dans Android Studio (`Maj+F10`).
 Android Studio ouvre une fenêtre : sélectionnez votre mobile. L'application doit se lancer sur votre téléphone !
 
-Vous aurez peut-être besoin d'installer les pilotes ADB : [Voir ce document](Installation des pilotes ADB.pdf)
-
 ### 5) Ajout du bouton
 
 Votre programme fonctionne ! On va maintenant ajouter un bouton pour que l'utilisateur puisse relancer la pièce !
 
 Ajouter un bouton dans la vue, en haut, nommez-le `b_coin_flip`. Personnalisez le label du bouton en utilisant une ressource...
 
-Pour que tout s'organise bien, positionnez le `Button` et le `TextView` dans un `LinearLayout`  à l'orientation verticale.
+Pour que tout s'organise bien, positionnez le `Button` et le `TextView` dans un `LinearLayout` à l'orientation verticale.
 
 Voici le code XML obtenu :
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CoinActivity">
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="vertical">
 
         <Button
@@ -243,7 +236,7 @@ Voici le code XML obtenu :
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
 Nous voulons que Java génère un événement lorsque l'utilisateur clique sur le bouton.
@@ -256,87 +249,101 @@ Il va falloir instancier le `Button` en objet Java (comme nous l'avons fait pour
 Maintenant, nous devons ajouter l'écouteur d'événement. Nous allons utiliser la fonction `setOnClickListener` :
 
 ```java
-    // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
+    protected void onCreate(Bundle savedInstanceState) {
+        // ...
 
-    // Ajout d'un écouteur d'événement "OnClickListener" anonyme à l'objet "Button" b_coin_flip représentant le composant "Button" "b_coin_flip"
-    b_coin_flip.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            // Here we have the function that flip the coin
-            CoinActivity.this.coinFlip();
-        }
-    });
+        // II - Add Event Listener
+        // Add an anonymous "OnClickListener" event listener to the "Button" object "b_coin_flip"
+        b_coin_flip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Here we call the function that flip the coin
+                MainActivity.this.coinFlip();
+            }
+        });
+
+        // ...
+    }
 ```
 
 Dans ce code, est instancié un écouteur d'événement anonyme (non stocké dans une variable) et directement définit comme l'écouteur d'événement du bouton.
 
 La fonction `onClick` de cet écouteur est appelée au clic sur le bouton.
 
-On fait alors appel à la fonction qu'on a crée précédement, attention, nous ne sommes plus dans la classe `CoinActivity`, il ne faut pas faire simplement `this.coinFlip()`, mais `CoinActivity.this.coinFlip()`.
+On fait alors appel à la fonction qu'on a crée précédemment, attention, nous ne sommes plus dans la classe `MainActivity`, il ne faut pas faire simplement `this.coinFlip()`, mais `MainActivity.this.coinFlip()`.
 
 Vous pouvez modifier le programme pour *ajouter* le dernier lancé au `TextView`... (Il faudra lors ajouter un `ScrollView` autour du `TextView`...)
 
 Voici la structure globale attendue :
 
 ```java
-public class CoinActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
-    /**
-     * Déclaration des objets Java représentant les composants graphiques
-     * (en attributs de la classe, ils sont donc accessibles depuis toutes les méthodes)
-     */
+    // Declaration of the class attribute to store the Java instance of the TextView
     TextView tv_coinResult;
     Button b_coin_flip;
 
-    /**
-     * Fonction exécutée à la création de la vue
-     * Elle DOIT instancier les objets Java représentant les composants
-     * graphiques ET leur ajouter des écouteurs d'événements si besoin.
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coin);
+        setContentView(R.layout.activity_main);
 
-        // I - Instanciation les objets Java représentant les composants graphiques
-        tv_coinResult = (TextView)findViewById(R.id.tv_coin_result);
-        b_coin_flip = (Button)findViewById(R.id.b_coin_flip);
+        // I - Retrieve the graphical components
+        tv_coinResult = findViewById(R.id.tv_coin_result);
 
-        // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
-
-        // Ajout d'un écouteur d'événement "OnClickListener" anonyme à l'objet "Button" b_coin_flip représentant le composant "Button" "b_coin_flip"
+        // II - Add Event Listener
+        // Add an anonymous "OnClickListener" event listener to the "Button" object "b_coin_flip"
         b_coin_flip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Here we have the function that flip the coin
-                CoinActivity.this.coinFlip();
+                // Here we call the function that flip the coin
+                MainActivity.this.coinFlip();
             }
         });
 
-        // III - Autre traitement à effectuer au début...
+        // III - Run other stuff
         coinFlip();
     }
 
-    protected  void coinFlip() {
-        // Creation of a randomGenerator
+    protected void coinFlip() {
+        // Random generation of a boolean in Java
         Random randomGenerator = new Random();
+        boolean random = randomGenerator.nextBoolean();
 
-        // Tail or not Tail that is the question?
-        boolean tail = randomGenerator.nextBoolean();
+        // Get labels in the resources
+        String tail = getString(R.string.tail);
+        String head = getString(R.string.head);
 
-        // Put the result in a string
+        // Result according to the random value
         String result;
-        if (tail) {
-            result = getResources().getString(R.string.tail);
+        if (random) {
+            result = tail;
         } else {
-            result = getResources().getString(R.string.head);
+            result = head;
         }
 
-        // Set the result
-        tv_coinResult.setText(result);
+        // Get previous content
+        String previousContent = tv_coinResult.getText().toString();
+        if (!previousContent.equals("")) {
+            previousContent = previousContent + '\n';
+        }
+
+        // Set TextView text
+        tv_coinResult.setText(previousContent + result);
     }
 }
 ```
+
+### Paysage
+
+Il est possible d'avoir une vue différente selon l'orientation du téléphone.
+
+Ouvrez la vue, allez sur l'icône d'orientation et cliquez sur « Create landscape version » :
+
+![Orientation](2_environnement_1_landscape.png)
+
+On peut par exemple mettre le `LinearLayout` en orientation `horizontal`.
+
 
 ## Les points à retenir
 
@@ -350,12 +357,12 @@ Beaucoup de **composants graphiques** existent déjà pour vous aider à dévelo
 
 Pour **agir sur les composants graphiques** il faut :
 * **instancier des objets Java représentant ces composants** (via `findViewById`) ;
-* leur associer des **écouteurs d'événements** (event listerners).
+* leur associer des **écouteurs d'événements**.
 
 ## Organisation du code
 
 Pour ne pas faire d'erreur sur la déclaration et l'instanciation des composants graphique, je vous conseil fortement de :
-* déclarer toutes les varaibles de composants comme attributs de classe (vous pourrez simplement accéder à tous les composants dans toutes les fonctions de classe) ;
+* déclarer toutes les variables de composants comme attributs de classe (vous pourrez simplement accéder à tous les composants dans toutes les fonctions de classe) ;
 * instancier tous les composants dès le début de la fonction `onCreate`;
 * associer les écouteurs d'événement aux composants juste après (créez sur votre classe d'activité une méthode à éxécuter pour chaque écouteur d'événement).
 
