@@ -1,4 +1,4 @@
-# Cours d'Android 2020
+# Cours d'Android
 
 
 ## Introduction
@@ -8,7 +8,7 @@
 * Bases de la programmation Android
 * Découverte d'Android Studio
 * Création de GUI
-* Webmapping sur mobiles
+* Cartographie sur mobiles
 
 ### Plan du cours
 
@@ -28,16 +28,14 @@ Cette première partie regroupe tous les documents explicatifs : les présentati
 
 Hello World!
 
-[Énoncé du TD](1_premiere_application/README.md)
+[Énoncé du TD](1_hello_world/README.md)
 
 
 ## Une deuxième application
 
-Jetons nous à l'eau !
+Pile ou Face
 
-[Présentation du TD](0_ressources/3_premiere_application.pdf)
-
-[Énoncé du TD](2_deuxieme_application/README.md)
+[Énoncé du TD](2_pile_ou_face/README.md)
 
 
 ## Google Services
