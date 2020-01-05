@@ -1,8 +1,7 @@
 # Une première application
 
 Pour mettre en pratique l'utilisation d'Android Studio et prendre
-en main un projet Android, nous allons créer une application simulant
-un lancer de pièce (pile ou face).
+en main un projet Android !
 
 ## Objectif
 
@@ -34,13 +33,23 @@ Regardez la structure du projet créé par Android Studio :
 
 Ouvrez les fichiers `manifests/AndroidManifest.xml`, `java/MainActivity`, et `res/layout/activity_main.xml` (en mode Design et Text) :
 
-![Structure du projet](screens/2_environnement_2_manifest.png)
+![Structure du projet - Android Manifest](screens/2_environnement_2_manifest.png)
 
-![Structure du projet](screens/2_environnement_3_CoinActivity.png)
+Un fichier [AndroidManifest.xml](https://developer.android.com/guide/topics/manifest/manifest-intro) a été généré, il contient notamment :
+* le nom de l'application ;
+* le package de l'application ;
+* la liste des composants (activités, services, ...) ;
+* les autorisations (pour le moment aucune).
 
-![Structure du projet](screens/2_environnement_4_activity_coin_design.png)
+![Structure du projet - MainActivity.java](screens/2_environnement_3_MainActivity.png)
 
-![Structure du projet](screens/2_environnement_5_activity_coin_text.png)
+Ce fichier contient la classe Java associée à l'activité principale de l'application. C'est son contrôleur, qui permet de gérer les interactions de l'utilisateur et de faire vivre la vue associée (la créer, afficher des informations, ...).
+
+![Structure du projet - activity_main.xml - Design](screens/2_environnement_4_activity_main_design.png)
+
+![Structure du projet - activity_main.xml - Text](screens/2_environnement_5_activity_main_text.png)
+
+Ce fichier permet de créer l'interface graphique qui sera affichée à l'ouverture, vous pouvez l'éditer en mode design ou en mode texte.
 
 Vous pouvez lancer l'application.
 
@@ -49,7 +58,7 @@ Vous pouvez lancer l'application.
 
 Dans cette première application, une activité a automatiquement été créée avec le projet.
 
-Les activité permettent de gérer l'interface utilisateur. On crée une activité pour chaque tâche que l'utilisateur peur faire dans notre application.
+Les activité permettent de gérer l'interface utilisateur. On crée une activité pour chaque tâche que l'utilisateur peut faire dans notre application.
 
 C'est donc l'équivalent d'une fenêtre d'un programme ou d'une page d'un site web.
 
@@ -57,7 +66,7 @@ C'est donc l'équivalent d'une fenêtre d'un programme ou d'une page d'un site w
 
 La classe [activité](https://developer.android.com/reference/android/app/Activity) permet de gérer l'interface graphique mais elle contient également le [Context](https://developer.android.com/reference/android/content/Context) de l'application.
 
-C'est le context qui permet de lier l'application (et les différentes activités que la composent) au système Android.
+C'est le context qui permet de lier l'application (et les différentes activités qui la composent) au système Android.
 
 ### Cycle de vie de l'activité
 
@@ -74,7 +83,7 @@ Il y a 4 états principaux :
 * `stopped` ou `hidden` : l'activité est complètement masquée, le système peut la terminer (ou la tuer) s'il a besoin de mémoire ;
 * `destroyed` : le système a fermé l'activité, il faut la recharger entièrement pour l'afficher de nouveau.
 
-Le schéma présente les différents état ainsi que les fonctions exécuté au passage de l'un à l'autre (ces fonctions ne sont pas nécessairement exécutées quand l'activité est « tuée » et non pas « terminée »).
+Le schéma présente les différents états ainsi que les fonctions exécutée au passage de l'un à l'autre des états (ces fonctions ne sont pas nécessairement exécutées quand l'activité est « tuée » et non pas « terminée »).
 
 Implémentez ces fonctions et utilisez les logs pour suivre leur executions.
 
@@ -142,7 +151,6 @@ Vous pouvez alors lancer l'application en allant dans l'onglet **Logcat** et en 
 Cette fonction permet d'initialiser la vue liée à votre activité :
 * la fonction `setContentView` permet de définir le contenu de l'interface ;
 * `R.layout.activity_main` est l'identifiant lié au fichier de ressource `res/layout/activity_main.xml` définissant l'interface.
-*
 
 ## Les points à retenir
 
@@ -150,4 +158,11 @@ L'interface est gérée par les activités. Une activité est une « page » de 
 
 Les activités ont un état : active, visible, arrêtée/cachée ou détruite.
 
-Au changement d'état, des fonctions sont appelées via le système Android : à vous d'effectuer les bonnes actions pour que votre activité réagisse correctement.
+Au changement d'état, des fonctions spécifiques sont appelées par le système Android : à vous d'effectuer les bonnes actions pour que votre activité réagisse correctement.
+
+## Projet complet
+
+Vous pouvez retrouver le projet complet ici : [https://gitlab.com/vsasyan/AndroidENSG-codes/tree/master/HelloWorld](https://gitlab.com/vsasyan/AndroidENSG-codes/tree/master/HelloWorld)
+
+
+Aller au tutoriel suivant : [Pil ou Face](../2_pile_ou_face/README.md)
