@@ -329,7 +329,7 @@ La récupération est conditionnée par une vérification réussi du droit d'acc
 
 Comme vous pouvez le voir, la récupération de la dernière position peut échouer, on a donc un écouteur d’événement qui gère le succès de l'opération et un autre l'échec...
 
-Modifier ce code pour que si la position est trouvée il ajout une autre balise sur la carte (vous pouvez par exemple créer une fonction `public void setLastLocationMarkerPosition(Location location)`).
+Modifier ce code pour que si la position est trouvée il ajout une autre balise sur la carte (vous pouvez par exemple créer une fonction `public void setLastLocationMarkerPosition(Location location)`, voir le [diagramme UML](uml/PositionName.png) pour avoir la liste des fonctions qu'il faudra créer).
 
 Vous pouvez ensuite appeler cette fonction dans la fonction `onMapReady`.
 
