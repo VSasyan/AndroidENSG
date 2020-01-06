@@ -65,13 +65,13 @@ Vous devez obtenir le code suivant (mode text) :
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/b_flip_coin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/flip_coin" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_coin_results"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -149,7 +149,7 @@ Puis instancier l'élément (dans la fonction `onCreate`) :
         // ...
 
         // Retrieve the TextView and store it in the class attribute
-        tv_coinResult = findViewById(R.id.tv_coin_result);
+        tv_coinResult = findViewById(R.id.tv_coin_results);
     }
 ```
 
@@ -341,7 +341,7 @@ Il est possible d'avoir une vue différente selon l'orientation du téléphone.
 
 Ouvrez la vue, allez sur l'icône d'orientation et cliquez sur « Create landscape version » :
 
-![Orientation](2_environnement_1_landscape.png)
+![Orientation](screens/2_environnement_1_landscape.png)
 
 On peut par exemple mettre le `LinearLayout` en orientation `horizontal`, et modifier le bouton pour qu'il occupe l'espace dans la hauteur :
 
