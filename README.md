@@ -19,9 +19,9 @@
 
 Cette première partie regroupe tous les documents explicatifs : les présentations vues en cours et des documents à lire de votre côté qui détaillent un peu plus.
 
-* [Présentation rapide d'Android](0_ressources/1_presentation_android.pdf) ;
-* [Installation d'Android Studio](0_ressources/0_installation_android_studio.md) ;
-* [Fonctionnement d'Android](0_ressources/2_fonctionnement_android.md).
+* [Présentation rapide d'Android](0_ressources/presentation_android.pdf) ;
+* [Installation d'Android Studio](0_ressources/installation_android_studio.md) ;
+* [Android Studio](0_ressources/android_studio.md).
 
 
 ## Une première application
