@@ -38,7 +38,7 @@ Cherchez les composants dans la Palette et faites les glisser.
 
 Vous devez obtenir :
 
-![Component tree](screen/../screens/2_environnement_2_component_tree.png)
+![Component tree](screens/2_environnement_2_component_tree.png)
 
 Cliquez sur le `Button`, et dans le volet Attributes :
 * définissez l'id à `b_flip_coin` ;
