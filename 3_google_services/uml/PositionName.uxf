@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>18</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>108</x>
+      <y>0</y>
+      <w>828</w>
+      <h>432</h>
+    </coordinates>
+    <panel_attributes>MapsActivity
+--
+- GoogleMap mMap
+- FusedLocationProviderClient mFusedLocationClient
++ Marker lastLocationMarker
++ Marker currentLocationMarker
+- ResultReceiver currentPositionResultReceiver
+--
+void onCreate()
+void onMapReady()
+void getLastPosition()
+void setLastLocationMarkerPosition(Location location)
+void setCurrentLocationMarkerPosition(Location location)
+void setCurrentLocationMarkerTitle(Location location)
+void geocode(Location location)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>108</x>
+      <y>468</y>
+      <w>828</w>
+      <h>396</h>
+    </coordinates>
+    <panel_attributes>FetchAddressIntentService
+--
+- static final String ACTION_GEOCODE
+- static final String EXTRA_PARAM_LOCATION
+- static final String EXTRA_PARAM_RECEIVER
++ static final int EXTRA_RESULT_ERROR
++ static final int EXTRA_RESULT_SUCCESS
++ static final String EXTRA_RESULT_ADDRESS
++ static final String EXTRA_RESULT_MESSAGE
+--
++ static void startActionGeocode
+void onHandleIntent(Intent intent)
+void handleActionGeocode(Location location, ResultReceiver receiver)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
