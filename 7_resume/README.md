@@ -8,7 +8,7 @@ Un projet Android est principalement composé de 2 types de fichiers :
 
 ### Les ressources
 
-Elle sont dans le dossier "\res" et permettent de transférer de l'information à votre application. En particulier :
+Elles sont dans le dossier "\res" et permettent de transférer de l'information à votre application. En particulier :
 * les constantes (dossier "\res\values") que ce soient des chaînes de caractères, des couleurs, etc ;
 * les vues (dossier "\res\layout") ;
 * les images (dossier "\res\drawable").
