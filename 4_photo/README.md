@@ -98,6 +98,7 @@ La fonction permet de récupérer un aperçus de l'image prise :
 ```java
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constants.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             // Get result
             Bundle extras = data.getExtras();
