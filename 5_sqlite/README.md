@@ -90,7 +90,7 @@ A ce stage, votre application doit s'ouvrir sur une page login et être capable 
 Vous pouvez complétez les fonctions `signIn` et `tryLogin` par un `Toast` pour tester le reste de l'interface :
 
 ```java
-Toast.makeText(this, "tryLogin", 2000).show();
+Toast.makeText(this, "tryLogin", Toast.LENGTH_SHORT).show();
 ```
 
 On a fait le plus gros du code de base. Il est temps maintenant de s'attaquer à la base de données.
