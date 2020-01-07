@@ -118,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // I - Instanciation les objets Java représentant les composants graphiques
-        askDay = (Button)findViewById(R.id.ask_day);
-        showDay = (TextView)findViewById(R.id.show_day);
+        askDay = findViewById(R.id.ask_day);
+        showDay = findViewById(R.id.show_day);
 
         // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
 
@@ -184,11 +184,11 @@ Souvenez-vous :
 
 ```java
     // Ne pas écrire :
-    askDay = (Button)findViewById(R.id.ask_day);
+    askDay = findViewById(R.id.ask_day);
     setContentView(R.layout.activity_main);
     // Mais :
     setContentView(R.layout.activity_main);
-    askDay = (Button)findViewById(R.id.ask_day);
+    askDay = findViewById(R.id.ask_day);
 ```
 
 * les composants sont utilisables après leur instanciation :
@@ -196,9 +196,9 @@ Souvenez-vous :
 ```java
     // Ne pas écrire :
     askDay.setOnClickListener(askDayClickListener);
-    askDay = (Button)findViewById(R.id.ask_day);
+    askDay = findViewById(R.id.ask_day);
     // Mais :
-    askDay = (Button)findViewById(R.id.ask_day);
+    askDay = findViewById(R.id.ask_day);
     askDay.setOnClickListener(askDayClickListener);
 ```
 
