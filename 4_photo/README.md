@@ -188,9 +188,9 @@ Il faut configurer ce `FileProvider` en ajoutant au fichier `AndroidManifest.xml
 <application>
     
     <!-- ... -->
-
+    
     <provider
-        android:name="android.support.v4.content.FileProvider"
+        android:name="androidx.core.content.FileProvider"
         android:authorities="@string/file_provider_authority"
         android:exported="false"
         android:grantUriPermissions="true">
