@@ -319,7 +319,7 @@ Maintenant nous allons tenter de récupérer la position. Créez une nouvelle fo
             ;
         } else {
             // Is not...
-            Toast.makeText(this, "Erreur: impossible d'accéder à la position", 5000).show();
+            Toast.makeText(this, "Erreur: impossible d'accéder à la position", Toast.LENGTH_LONG).show();
         }
     }
 ```
@@ -549,7 +549,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ;
         } else {
             // Is not...
-            Toast.makeText(this, "Erreur: impossible d'accéder à la position", 5000).show();
+            Toast.makeText(this, "Erreur: impossible d'accéder à la position", Toast.LENGTH_LONG).show();
         }
     }
 
