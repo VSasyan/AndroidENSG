@@ -144,7 +144,7 @@ On ne récupère pas l'axe Z, donc si vous posez votre téléphone sur la table 
 
 ## La balle
 
-Complétez la classe Ball selon l'UML suivant :
+Complétez la classe `Ball` selon l'UML suivant :
 
 ![Classe Ball](uml/Ball.png)
 
@@ -272,6 +272,8 @@ paint.setColor(Color.RED);
 ### Lancez l'application !
 
 Normalement l'application devrait fonctionner, et la balle devrait rouler...
+
+Vous pouvez [passer l'application en plein écran](https://developer.android.com/training/system-ui/immersive).
 
 ## Les points à retenir
 
