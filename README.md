@@ -19,9 +19,10 @@
 
 Cette première partie regroupe tous les documents explicatifs : les présentations vues en cours et des documents à lire de votre côté qui détaillent un peu plus.
 
-* [Présentation rapide d'Android](0_ressources/presentation_android.pdf) ;
+* [Présentation d'Android](0_ressources/presentation_android.pdf) ;
 * [Installation d'Android Studio](0_ressources/installation_android_studio.md) ;
-* [Android Studio](0_ressources/android_studio.md).
+* [Android Studio](0_ressources/android_studio.md) ;
+* [Présentation Design Pattern](0_ressources/design_patterns.pptx) ([pdf](0_ressources/design_patterns.pdf)) et [Résumé Design Pattern](0_ressources/design_patterns.md).
 
 
 ## Une première application
@@ -55,6 +56,13 @@ Carte, géolocalisation et géo-codage avec les services Google.
 Une base de données pour les stocker toutes.
 
 [Énoncé du TD](5_sqlite/README.md)
+
+
+## Les capteurs
+
+L'accéléromètre.
+
+[Énoncé du TD](6_capteurs/README.md)
 
 
 ## Résumé

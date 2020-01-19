@@ -4,26 +4,26 @@
 
 Un projet Android est principalement composé de 2 types de fichiers :
 * les ressources ;
-* les classes Java (*UNE classe dans UN fichier*).
+* les classes Java.
 
 ### Les ressources
 
-Elles sont dans le dossier "\res" et permettent de transférer de l'information à votre application. En particulier :
-* les constantes (dossier "\res\values") que ce soient des chaînes de caractères, des couleurs, etc ;
-* les vues (dossier "\res\layout") ;
-* les images (dossier "\res\drawable").
+Elles sont dans le dossier `\res` et permettent de transférer de l'information à votre application. En particulier :
+* les constantes (dossier `\res\values`) que ce soient des chaînes de caractères, des couleurs, etc ;
+* les Vues (dossier `\res\layout`) ;
+* les images (dossier `\res\drawable`).
 
 ### Les classes java
 
 C'est le cœur de votre application, il y en a deux types à distinguer :
-* les activités : ce sont des classes spécialisées qui permettent de faire le lien avec les vues ;
-* les autres : toute classe Java permettant de traiter et de gérer la donnée.
+* les activités : ce sont des classes spécialisées qui assurent la gestion de l'affichage (Contrôleur) ;
+* les autres : toute classe Java permettant de traiter et de gérer la donnée (Modèle, Service, ...).
 
 ## Organisation du code
 
 ### Les ressources « string »
 
-Elles sont déclarées dans le fichier "\res\values\string.xml" :
+Elles sont déclarées dans le fichier `\res\values\string.xml` :
 
 ```xml
 <resources>
@@ -40,7 +40,7 @@ On peut y accéder depuis :
 
 ### Les ressources « vue »
 
-Elles sont déclarées dans le dossier "\res\layout\" : il y a un fichier par vue.
+Elles sont déclarées dans le dossier `\res\layout\` : il y a au moins un fichier par vue.
 
 Conseil :
 * pensez à bien nommer vos composants pour y accéder plus facilement ensuite ;
@@ -95,7 +95,7 @@ Exemple :
 
 Ce sont des classes Java classiques mais elles permettent en plus de gérer l'interface avec l'utilisateur. Pour cela, vous devrez instancier les composants en objets Java.
 
-Je vous conseil de **toujours** utiliser cette structure :
+Utilisez par exemple cette structure :
 
 ```java
 public class MainActivity extends AppCompatActivity {
@@ -136,17 +136,17 @@ public class MainActivity extends AppCompatActivity {
     }
     
     protected void askDayFunction() {
-        // Récupération de la réponse brute (depuis les ressources)
-        String réponse_brute = getString(R.string.today);
+        // Récupération du pattern (depuis les ressources)
+        String today_pattern = getString(R.string.today);
 
         // Récupération de la date (déclaration et instanciation d'un objet Date)
         Date date = new Date();
 
-        // Génération de la réponse :
-        String réponse = String.format(réponse_brute, date.getDate());
+        // Génération de la valeur :
+        String valeur = String.format(today_pattern, date.getDate());
 
-        // Affichage de la réponse en utilisant un composant graphique TextView :
-        showDay.setText(réponse);
+        // Affichage de la valeur en utilisant un composant graphique TextView :
+        showDay.setText(valeur);
     }
 
 }
