@@ -47,7 +47,7 @@ Lorsque l'utilisateur n'a pas de compte il va appuyer sur le bouton "Sign in" po
 
 Il va alors falloir ouvrir l'activité `SignInActivity` qui lui permettra de s'enregistrer.
 
-Pour ouvrir une autre activité, on utilise un `Intent`, cela permet également de transmettre des informations :
+Pour ouvrir une autre activité, on utilise un `Intent` (avec transmission d'information : le mail) :
 
 ```java
     // Instanciation du champ email en "et_email" (onClick)
@@ -261,6 +261,46 @@ Puis des fonctions :
 Modifier la commande de création pour créer vos tables SQL, voici le schéma attendu de la base :
 
 ![Schéma UML de la BD](uml/schema_base_de_donnes.png)
+
+**A ce stade, vous devriez pouvoir lancer l'application pour tester que création de la base fonctionne.**
+
+Une fois l'application lancée, allez dans le dossier `platform-tools` situé dans le dossier du `AndroidSQK` (allez voir dans les *Settings* d'Android Studio l'emplacement) :
+
+![Android SDK - Settings](screens/adb_androidSDK.png)
+
+![Android SDK - Platform Tools](screens/adb_platform_tools.png)
+
+Vous pouvez ouvrir une console de commande :
+
+![Open Console](screens/adb_open_console.png)
+
+Tapez `.\adb.exe shell`. Cela va ouvrir un shell sur le téléphone (ou l'émulateur).
+
+Tapez `run-as fr.ign.vsasyan.pointsofinterest sh` pour ouvrir avoir les droits en écriture/lecture de votre application.
+
+Vous êtes dans le dossier privé de votre application, tapez `cd databases` pour aller dans le dossier où sont stockés les fichiers de base de données.
+
+Tapez enfin `sqlite3 points_of_interest.db` pour ouvrir un accès vers la base :
+
+![Commands](screens/adb_commands.png)
+
+La commande `.tables` permet de lister les tables :
+
+```
+sqlite> .tables
+android_metadata   point_of_interest  user
+```
+
+Pour le reste, c'est du SQL classique :
+
+```
+sqlite> SELECT * FROM point_of_interest;
+1|ENSG|La meilleur école d'ingénieurs en géomatique du monde|48.8410201|2.5872416|1
+2|Ecole des ponts||48.8410536|2.587911|1
+3|IFTAR||48.8423652|2.5874393|1
+```
+
+Vous pouvez également récupérer le fichier sur votre via le *Device File Explorer* et utiliser un client SQLite3.
 
 #### d) Classes DAO
 
@@ -484,7 +524,7 @@ Et ajouter un constructeur avec l'identifiant dans la classe parente (`DataBaseO
 
 Vous pouvez compléter de même ce qui concerne les points d’intérêt, avec cette fois-ci une fonction `ArrayList<PointOfInterest> findByUserId(Long user_id)` : nous récupérons tous les points d'intérêt associés à un utilisateur.
 
-Il faut utiliser une boucle `while` pour boucler sur le curseur tant qu'il est possible de paser à la ligne suivante (`moveToNext`).
+Il faut utiliser une boucle `while` pour boucler sur le curseur tant qu'il est possible de passer à la ligne suivante (`moveToNext`).
 
 ### 3) Utilisation de la base de données
 
@@ -494,7 +534,7 @@ Au démarrage des activités, nous allons :
 * récupérer les DAO.
 
 ```java
-        // Instantiation des attributs concernants la gestion de la base de données (méthode onCreate)
+        // Instantiation des attributs concernant la gestion de la base de données (méthode onCreate)
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
         db = dataBaseHelper.getWritableDatabase();
         userDAO = new UserDAO(db);
@@ -543,7 +583,7 @@ Vous pouvez mettre et récupérer n'importe quel objet `Serializable` dans les e
 
 Note : nos `User` sont bien `Serializable` car ils héritent de la classe `DataBaseObject` qui `implements Serializable`...
 
-#### b) Signin
+#### b) Sign-in
 
 Complétez la fonction pour s'inscrire.
 
@@ -611,7 +651,7 @@ Voici le code XML à utiliser :
 </menu>
 ```
 
-L'idée est de transmettre ensuite la position de l'utilisateur et l'objet user à l'`AddPoinActivity` qui présente à l'utilisateur le formulaire.
+L'idée est de transmettre ensuite la position de l'utilisateur et l'objet user à l'`AddPointActivity` qui présente à l'utilisateur le formulaire.
 
 Le géo-positionnement se ferait donc dans la `MapsActivity` (par exemple).
 
