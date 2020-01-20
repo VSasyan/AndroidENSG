@@ -262,7 +262,7 @@ Modifier la commande de création pour créer vos tables SQL, voici le schéma a
 
 ![Schéma UML de la BD](uml/schema_base_de_donnes.png)
 
-**A ce stade, vous devriez pouvoir lancer l'application pour tester que création de la base fonctionne.**
+**A ce stade, vous devriez pouvoir lancer l'application pour tester que la création de la base fonctionne.**
 
 Une fois l'application lancée, allez dans le dossier `platform-tools` situé dans le dossier du `AndroidSQK` (allez voir dans les *Settings* d'Android Studio l'emplacement) :
 
@@ -276,7 +276,7 @@ Vous pouvez ouvrir une console de commande :
 
 Tapez `.\adb.exe shell`. Cela va ouvrir un shell sur le téléphone (ou l'émulateur).
 
-Tapez `run-as fr.ign.vsasyan.pointsofinterest sh` pour ouvrir avoir les droits en écriture/lecture de votre application.
+Tapez `run-as fr.ign.vsasyan.pointsofinterest sh` pour ouvrir avoir les droits en écriture/lecture de votre application (remplacez `fr.ign.vsasyan.pointsofinterest` par le nom de package de votre application).
 
 Vous êtes dans le dossier privé de votre application, tapez `cd databases` pour aller dans le dossier où sont stockés les fichiers de base de données.
 
