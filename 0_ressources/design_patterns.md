@@ -10,7 +10,7 @@
 
 ## MVC : Modèle Vue Contrôleur
 
-Séparations en 3 modules :
+Séparations en 3 parties :
 
 * Modèle : classes de gestion des données (validation, lecture, enregistrement) ;
 * Vue : gestion de l'interface graphique (elements graphique et représentation de la donnée) ;
