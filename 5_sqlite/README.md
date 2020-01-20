@@ -262,7 +262,14 @@ Modifier la commande de création pour créer vos tables SQL, voici le schéma a
 
 ![Schéma UML de la BD](uml/schema_base_de_donnes.png)
 
-**A ce stade, vous devriez pouvoir lancer l'application pour tester que la création de la base fonctionne.**
+**A ce stade, vous devriez pouvoir lancer l'application pour tester que la création de la base fonctionne, il faudra ajouter un appel à la classe `` :**
+
+```
+        // Dans le onCreate de LoginActivity (à enlever après le test)
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+        dataBaseHelper.getWritableDatabase();
+```
+
 
 Une fois l'application lancée, allez dans le dossier `platform-tools` situé dans le dossier du `AndroidSQK` (allez voir dans les *Settings* d'Android Studio l'emplacement) :
 
