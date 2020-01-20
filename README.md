@@ -60,7 +60,7 @@ Une base de données pour les stocker toutes.
 
 ## Les capteurs
 
-L'accéléromètre.
+Un exemple avec l'accéléromètre.
 
 [Énoncé du TD](6_capteurs/README.md)
 
