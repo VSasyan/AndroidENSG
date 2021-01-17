@@ -5,7 +5,7 @@ Voir également : [installation Android Studio](./installation_android_studio.md
 
 ## Environnement de développement
 
-Android studio fournis plein d'outils pour vous aider à développer, les plus importants étant :
+Android studio fournis des outils pour vous aider à développer, les plus importants étant :
 * les SDK : ils sont chacun associés à une version d'Android minimale, c'est un ensemble d'outils et d'API qui vous permettent d’utiliser le téléphone portable et les outils Google ;
 * Gradle : cet outil permet de gérer les dépendances de votre projet, d'en assurer la compilation, etc ;
 * Logcat : gestion des logs.

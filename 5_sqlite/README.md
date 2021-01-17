@@ -407,7 +407,7 @@ public class UserDAO extends DAO<User> {
 
 ```java
 public class PointOfInterestDAO extends DAO<PointOfInterest> {
-    
+
     public PointOfInterestDAO(SQLiteDatabase db) {
         super(db);
     }
@@ -432,7 +432,7 @@ public class PointOfInterestDAO extends DAO<PointOfInterest> {
 
 Pour le moment elles ne font rien !
 
-Il va falloir agir sur l'attribut db pour accéder à la base :
+Il va falloir agir sur l'attribut `db` pour accéder à la base :
 
 ```java
     public User create(User obj) {

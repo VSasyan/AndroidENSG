@@ -5,7 +5,6 @@
 * MVC : Modèle Vue Contrôleur
 * DAO : Data Access Object (Object d'Accès aux Données)
 * Composite
-* Decorator (Décorateur)
 * Observer (Observateur)
 
 ## MVC : Modèle Vue Contrôleur
@@ -13,7 +12,7 @@
 Séparations en 3 parties :
 
 * Modèle : classes de gestion des données (validation, lecture, enregistrement) ;
-* Vue : gestion de l'interface graphique (elements graphique et représentation de la donnée) ;
+* Vue : gestion de l'interface graphique (élements graphiques et représentation de la donnée) ;
 * Contrôleur : traitement des actions utilisateur (agit sur le modèle et la vue).
 
 En Android :
@@ -37,23 +36,6 @@ Pour exemple, voici la représentation d'une arborescence de dossiers et de fich
 ![UML Composite](uml/composite.png)
 
 L'ajout d'un fichier ou d'un dossier à un dossier se fait de la même manière : ces deux objets implémentent la même interface logicielle.
-
-## Decorator (Décorateur)
-
-Le décorateur permet d'attacher dynamiquement de nouvelles responsabilités à un objet (ce qui est plus souple qu'un héritage).
-
-En Android, cela est notamment utilisé lors de la création d'écouteurs d'événement et de callbacks :
-
-```java
-View.OnClickListener listener = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        // Here we do some stuff...
-    }
-};
-```
-
-Dans l'exemple précédent, la classe `View.OnClickListener` est *décorée* : on modifie dynamiquement la fonction `onClick`.
 
 ## Observer (Observateur)
 
