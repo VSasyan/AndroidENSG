@@ -77,11 +77,7 @@ Avant de créer un premier projet, nous allons configurer un peu plus Android st
 
 ![SDK Tools](screens/0_config_avancee_2.png)
 
-3. Cliquez sur "HTTP Proxy" à gauche (ou tapez "proxy" dans la barre de recherche en haut) : choisissez "**Manuel proxy configuration**", host `http://proxy.ensg.eu`, port "**3128**" :
-
-![Proxy](screens/0_config_avancee_3.png)
-
-4. Cliquez sur OK et confirmez.
+3. Cliquez sur OK et confirmez.
 
 
 ### Ajout d'un lanceur
