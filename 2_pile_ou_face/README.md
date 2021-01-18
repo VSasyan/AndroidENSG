@@ -45,7 +45,7 @@ Cliquez sur le `Button`, et dans le volet Attributes :
 * cliquez à droite du champs `text` sur « Pick a Resource », créez un nouvelle ressource nommée `flip_coin` et de valeur `Flip!`.
 
 Cliquez sur le `TextView`, et dans le volet Attributes :
-* définissez l'id à `tv_coin_results` ;
+* définissez l'id à `tv_coin_result` ;
 * videz le champs `text`.
 
 Vous devez obtenir le code suivant (mode text) :
@@ -71,7 +71,7 @@ Vous devez obtenir le code suivant (mode text) :
             android:text="@string/flip_coin" />
 
         <TextView
-            android:id="@+id/tv_coin_results"
+            android:id="@+id/tv_coin_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -149,7 +149,7 @@ Puis instancier l'élément (dans la fonction `onCreate`) :
         // ...
 
         // Retrieve the TextView and store it in the class attribute
-        tv_coinResult = findViewById(R.id.tv_coin_results);
+        tv_coinResult = findViewById(R.id.tv_coin_result);
     }
 ```
 
