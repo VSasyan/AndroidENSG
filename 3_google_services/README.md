@@ -513,10 +513,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in ENSG and move the camera
-        LatLng sydney = new LatLng(48.841023,2.5873236);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in ENSG"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+        LatLng ensg = new LatLng(48.841023,2.5873236);
+        mMap.addMarker(new MarkerOptions().position(ensg).title("Marker in ENSG"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ensg, 14));
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
         // get Last location
