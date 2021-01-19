@@ -827,6 +827,6 @@ Elle sont automatiquement exécutées à l'ouverture et à la fermeture de l'act
 
 ## Projet complet
 
-Vous pouvez retrouver le projet complet ici : [https://gitlab.com/vsasyan/AndroidENSG-codes/tree/master/TwoSidesOfTheCoin](https://gitlab.com/vsasyan/AndroidENSG-codes/tree/master/TwoSidesOfTheCoin)
+Vous pouvez retrouver le projet complet ici : [https://gitlab.com/vsasyan/AndroidENSG-codes/-/tree/master/PositionName](https://gitlab.com/vsasyan/AndroidENSG-codes/-/tree/master/PositionName)
 
 Aller au tutoriel suivant : [Photos](../4_photo/README.md)
