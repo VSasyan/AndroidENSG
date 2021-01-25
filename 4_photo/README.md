@@ -253,7 +253,7 @@ Il faut maintenant modifier la fonction `onActivityResult` car il n'y aura plus 
     }
 ```
 
-### 6) Ajoutons un peu de Géomatique
+### 7) Ajoutons un peu de Géomatique
 
 Maintenant nous allons supposer que notre application localisait l'utilisateur en arrière plan ([Voir TD 3](../3_google_services/)) et qu'il y a deux attributs `Double lat, lng;` comme attributs de classe.
 
