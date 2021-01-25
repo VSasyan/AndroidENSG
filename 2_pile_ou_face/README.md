@@ -339,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
 
 Il est possible d'avoir une vue différente selon l'orientation du téléphone.
 
-Ouvrez la vue, allez sur l'icône d'orientation et cliquez sur « Create landscape version » :
+Ouvrez la vue, allez sur l'icône d'orientation et cliquez sur « Create landscape variation » :
 
 ![Orientation](screens/2_environnement_1_landscape.png)
 
