@@ -176,7 +176,7 @@ Ensuite, nous allons modifier le code de la fonction `startPictureIntent` :
 Une ligne doit vous sembler mystérieuse :
 
 ```java
-                Uri photoURI = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile);
+                Uri photoURI = FileProvider.getUriForFile(this, getString(R.string.file_provider_authority), photoFile);
 ```
 
 Cette manière de faire permet d'autoriser l'application photo que l'on utilise pour prendre la photo à écrire le fichier. Si on a pris une zone de stockage privée réservée à notre application, Android va laisser l'application photo accéder au fichier que l'on précise. Alors qu'en temps normal, cette zone est privée.
