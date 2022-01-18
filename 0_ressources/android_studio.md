@@ -26,7 +26,7 @@ Au premier démarrage d'Android Studio, nous avons téléchargé la dernière ve
 
 ![SDK Manager](screens/2_sdk_manager.png)
 
-(C'est en fait un raccourci vers [les options de configurations Android Studio](0_installation_android_studio.md#configuration-avanc%C3%A9e) déjà utilisées.)
+(C'est en fait un raccourci vers [les options de configurations Android Studio](./installation_android_studio.md#configuration-avancée) déjà utilisées.)
 
 Il n'y a pas que les SDK principaux, mais également d'autres outils (comme par exemple les Google Services qui permettent notamment de faire des cartes).
 
