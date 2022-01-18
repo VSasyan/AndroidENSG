@@ -10,10 +10,10 @@ Android Studio a besoin du Kit de Développement Java pour fonctionner.
 
 ### Installation sur Ubuntu
 
-Installez simplement la version 8 d'`openjdk` via `apt` :
+Installez jre (Java Runtime Environment) et jdk (Java Development Kit) via `apt` :
 
 ```sh
-sudo apt update && sudo apt install openjdk-8-jdk -y
+sudo apt update && sudo apt install default-jre default-jdk -y
 ```
 
 ### Windows/Mac
