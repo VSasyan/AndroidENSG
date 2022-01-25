@@ -43,6 +43,17 @@ Notes :
 
 2) Depuis la version 18 du SDK, **toutes les applications** ont automatiquement un droit d'écriture et de lecture **dans une zone mémoire accessible à l'application seule** (là où sont d'ailleurs sauvés les fichiers SQLite, cf TP 5). Cette zone mémoire est automatiquement supprimée à la désinstallation de l’application.
 
+De plus, il faudra indiquer que vous souhaitez utiliser une application tierce pour prendre un photo. Juste avant la fin du manifest, ajoutez :
+
+```xml
+    <queries>
+        <!-- Camera -->
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+```
+
 ### 2) Chemin d'accès
 
 Nous verrons *trois* accès possibles :
