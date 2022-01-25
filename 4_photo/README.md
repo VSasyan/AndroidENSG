@@ -4,7 +4,7 @@ Android permet également de prendre des photos.
 
 Il y a deux manières :
 * en utilisant l'API de base ;
-* en utilisant une autre application photo installer sur le téléphone.
+* en utilisant une autre application photo installée sur le téléphone.
 
 Nous verrons la seconde manière qui est plus simple pour commencer.
 
@@ -16,13 +16,13 @@ Cette partie permet de voir :
 
 ## Le principe de l'application
 
-L'application sera composée d'un écran de bienvenue (`MainActivity`) et d'une carte (MapsActivity). On va se concentrer sur la prise de photo géolocalisée (qui se fera depuis la MainActivity), une application complète pourrait par exemple permettre de voir les photos qui ont été prises sur la carte.
+L'application sera composée d'un écran de bienvenue (`MainActivity`) et d'une carte (`MapsActivity`). On va se concentrer sur la prise de photo géolocalisée (qui se fera depuis la `MainActivity`), une application complète pourrait par exemple permettre de voir les photos qui ont été prises sur la carte.
 
 ## Mise en place
 
-Créer un nouveau projet appelé `GeoPicture` avec une première activité de type *Basic Activity* nommée `MainActivity`.
+Créer un nouveau projet appelé `GeoPicture` avec une première activité de type **Basic Activity** nommée `MainActivity`.
 
-Créer une autre activité de type *maps* nommée `MapsActivity`.
+Créer une autre activité de type **maps** nommée `MapsActivity`.
 
 ## Pas à pas des modifications
 
@@ -41,7 +41,7 @@ Notes :
 
 1) Il y a également une autorisation pour la lecture (`android.permission.READ_EXTERNAL_STORAGE`) cependant, l'autorisation d'écriture (`android.permission.WRITE_EXTERNAL_STORAGE`) comprend implicitement cette autorisation.
 
-2) Depuis la version 18 du SDK, **toutes les applications** ont automatiquement un droit d'écriture et de lecture **dans une zone mémoire accessible à l'application seule** (là où sont d'ailleurs sauvés les fichiers SQLite). Cette zone mémoire est automatiquement supprimée à la désinstallation de l’application.
+2) Depuis la version 18 du SDK, **toutes les applications** ont automatiquement un droit d'écriture et de lecture **dans une zone mémoire accessible à l'application seule** (là où sont d'ailleurs sauvés les fichiers SQLite, cf TP 5). Cette zone mémoire est automatiquement supprimée à la désinstallation de l’application.
 
 ### 2) Chemin d'accès
 
