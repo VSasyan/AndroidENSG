@@ -20,7 +20,7 @@ L'application sera composée d'un écran de bienvenue (`MainActivity`) et d'une 
 
 ## Mise en place
 
-Créer un nouveau projet appelé `GeoPicture` avec une première activité de type **Basic Activity** nommée `MainActivity`.
+Créer un nouveau projet appelé `GeoPicture` avec une première activité de type **Empty Activity** nommée `MainActivity`.
 
 Créer une autre activité de type **maps** nommée `MapsActivity`.
 
