@@ -22,8 +22,9 @@ Créez un nouveau projet :
 2. Configurez votre projet :
    1. appelez-le `HelloWorld` ;
    2. choisissez un nom de package (par exemple `fr.ign.helloworld`) ;
+   3. choisissez un emplacement de sauvegarde (sur `D:\`) ;
    3. sélectionnez le language Java ;
-   4. sélectionnez l'API 15.
+   4. sélectionnez l'API 28.
 
 ![Écran de création 2/2](screens/1_creation_2.png)
 
@@ -31,7 +32,7 @@ Regardez la structure du projet créé par Android Studio :
 
 ![Structure du projet](screens/2_environnement_1_structure.png)
 
-Ouvrez les fichiers `manifests/AndroidManifest.xml`, `java/MainActivity`, et `res/layout/activity_main.xml` (en mode Design et Text) :
+Nous allons regarder les fichiers `manifests/AndroidManifest.xml`, `java/MainActivity`, et `res/layout/activity_main.xml` (en mode Design et Text) :
 
 ![Structure du projet - Android Manifest](screens/2_environnement_2_manifest.png)
 
@@ -51,8 +52,13 @@ Ce fichier contient la classe Java associée à l'activité principale de l'appl
 
 Ce fichier permet de créer l'interface graphique qui sera affichée à l'ouverture, vous pouvez l'éditer en mode design ou en mode texte.
 
-Vous pouvez lancer l'application.
+Vous pouvez lancer l'application (voir [Utiliser les émulateurs](../0_ressources/utiliser_emulateurs.md) pour créer un émulateur) :
 
+![Run App](screens/2_environnement_7_run_app.png)
+
+Si rien en se passe, regardez en bas à droite, Gradle doit être en train de compiler votre projet :
+
+![Gradle compile](screens/2_environnement_8_gradle.png)
 
 ## Les activités
 
@@ -83,7 +89,7 @@ Il y a 4 états principaux :
 * `stopped` ou `hidden` : l'activité est complètement masquée, le système peut la terminer (ou la tuer) s'il a besoin de mémoire ;
 * `destroyed` : le système a fermé l'activité, il faut la recharger entièrement pour l'afficher de nouveau.
 
-Le schéma présente les différents états ainsi que les fonctions exécutée au passage de l'un à l'autre des états (ces fonctions ne sont pas nécessairement exécutées quand l'activité est « tuée » et non pas « terminée »).
+Le schéma présente les différents états ainsi que les fonctions exécutées au passage de l'un à l'autre des états (ces fonctions ne sont pas nécessairement exécutées quand l'activité est « tuée » et non pas « terminée »).
 
 Implémentez ces fonctions et utilisez les logs pour suivre leur executions.
 
@@ -132,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
+
+La classe `Log` ne doit pas être importée par défaut. Positionnez votre curseur sur le mot-clef `Log` en rouge en cliquez sur `<Alt>` + `<Entrée>` pour importer automatiquement.
 
 Vous pouvez alors lancer l'application en allant dans l'onglet **Logcat** et en entrant « ENSG » (ou le tag que vous avez utilisé) dans le filtre. Quittez et ré-ouvrez l'application avant de la fermer via le gestionnaire. Regardez les logs :
 
