@@ -5,21 +5,22 @@ un lancer de pièce (pile ou face).
 
 ## Objectifs
 
-Il y deux objectifs fondamentaux dans cette partie :
+Il y trois objectifs fondamentaux dans cette partie :
 * revoir l'utilisation des objets en Java : Déclaration, Instanciation, Utilisation
-* introduire le concept d'écoute événementielle.
+* introduire le concept d'écoute événementielle ;
+* voir l'organisation des composants graphiques.
 
 ## Le principe de l'application
 
 L'application sera composée d'une vue permettant d'afficher du texte (`TextView`).
-Il y aura, stockés dans les ressources, deux labels correspondants aux résultats
+Il y aura, stockés dans les ressources, deux strings correspondants aux résultats
 en anglais ("Tail" ou "Head").
 
 Au démarrage de l'application, le programme génère un booléen aléatoirement égal à `true` ou `false`, et affiche le label correspondant. L'utilisateur peut effectuer un nouveau lancer en cliquant sur un bouton.
 
 ## Mise en place
 
-Créez un nouveau projet appelé "TwoSidesOfTheCoin". Utilisez, de même que pour la première, une **activité vide** et faites un projet en Java.
+Créez un nouveau projet appelé `TwoSidesOfTheCoin`. Utilisez, de même que pour la première, une **activité vide** et faites un projet en Java.
 
 
 ## Pas à pas des modifications
@@ -28,13 +29,13 @@ Créez un nouveau projet appelé "TwoSidesOfTheCoin". Utilisez, de même que pou
 
 Passez en mode design.
 
-Dans un premier temps, il faut tout supprimer : dans le carré component Tree, supprimez tout sauf le `ConstraintLayout` à la racine.
+Dans un premier temps, il faut supprimer les composants créés par Android Studio : dans l'onglet *Component Tree* en bas à gauche, supprimez tout sauf le `ConstraintLayout` à la racine.
 
 Puis nous allons ajouter un `LinearLayout` (vertical), pour organiser les éléments, avec dedans :
 * un `Button` ;
 * un `TextView`.
 
-Cherchez les composants dans la Palette et faites les glisser.
+Cherchez les composants dans la Palette en haut à gauche et faites les glisser.
 
 Vous devez obtenir :
 
@@ -97,124 +98,126 @@ Il faut ajouter deux ressources nommées `tail` et `head` avec pour valeur respe
 
 ### 3) Modification de l'activité
 
-Nous allons maintenant modifier l'activité (fichier `java/[nom de votre package]/MainActivity`). Pour rappel la méthode `onCreate` est exécutée à la création de l'activité. Comme cette activité est l'activité de démarrage de l'application, cette fonction sera exécutée sans intervention de l'utilisateur.
+Nous allons maintenant modifier l'activité (fichier `java/[nom de votre package]/MainActivity`). Pour rappel la méthode `onCreate` est exécutée à la création de l'activité. Comme cette activité est l'activité de démarrage de l'application, cette méthode sera exécutée sans intervention de l'utilisateur.
 
-Vous pouvez voir qu'il y a deux lignes dans la fonction, celles qui permettent d'afficher la vue (voir [premier précédent](../1_premiere_application/README.md)). Vous devez effectuer vos modifications après.
+Vous pouvez voir qu'il y a deux lignes dans la méthode, celles qui permettent d'afficher la vue (voir [précédemment](../1_hello_world/README.md)). Vous devez effectuer vos modifications après.
 
-On va ajouter une méthode à la classe, nommée `protected void coinFlip()` qui va simuler le lancement de la pièce, puis ajouter « Tail » ou « Head », à la ligne, dans le `TextView`.
+Pour simuler le lancement de la pièce, nous voulons mettre « Tail » ou « Head » dans le `TextView`. Pour cela, il va falloir instancier le composant graphique en Java afin d'agir sur celui-ci.
 
-#### a) Lancement de la pièce
+Ensuite, nous allons ajouter une méthode à la classe, nommée `protected void coinFlip()` qui va simuler le lancement de la pièce, puis ajouter « Tail » ou « Head », à la ligne, dans le `TextView`.
 
-```java
-    protected void coinFlip() {
-        // Random generation of a boolean in Java
-        Random randomGenerator = new Random();
-        boolean random = randomGenerator.nextBoolean();
+#### a) Instanciation du composant graphique
 
-        // Get labels in the resources
-        String tail = getString(R.string.tail);
-        String head = getString(R.string.head);
+Dans un premier temps, nous déclarons un attribut de classe permettant de manipuler le composant en Java.
 
-        // Result according to the random value
-        // String result = ...
-    }
-```
-
-Si une classe n'est pas connue par Android Studio, positionnez le curseur dessus et cliquez sur `<Alt>` + `<Entrée>`, le programme vous proposera d'importer ce qu'il manque.
-
-
-#### b) Afficher le résultat
-
-Il faut dans un second temps récupérer le `TextView` de la vue, de manière à instancier un objet Java qui le représente.
-
-Cela s'effectue grâce à la fonction `findViewById([ressource_id])` qui prend comme paramètre l'identifiant de votre contrôle graphique (qui est une ressource). Si votre élément s'appelle `tv_coin_result`, l'identifiant de ressource est : `R.id.tv_coin_result`.
-
-Il faut donc déclarer votre variable (comme attribut de classe) :
+Ajoutez au début de la classe :
 
 ```java
 public class MainActivity extends AppCompatActivity {
 
-    // Declaration of the class attribute to store the Java instance of the TextView
+    // Déclaration d'un attribut de classe pour stocker l'instance Java du TextView
     TextView tv_coinResult;
 
     // ...
 }
 ```
 
-Puis instancier l'élément (dans la fonction `onCreate`) :
+Dans un deuxième temps, dans la méthode `onCreate`, après l'initialisation de l'interface, nous allons ajouter l'instanciation de notre composant graphique :
 
 ```java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // ...
 
-        // Retrieve the TextView and store it in the class attribute
+        // Instanciation du TextView en attribut de classe
         tv_coinResult = findViewById(R.id.tv_coin_result);
     }
 ```
 
-Enfin il suffit de définir le texte de notre `TextView` (dans la méthode `coinFlip`) :
+Enfin, nous pouvons utiliser l'attribut de classe pour agir sur le composant graphique.
+
+Ajoutez dans `onCreate` une ligne pour définir le text du composant :
 
 ```java
-    protected void coinFlip() {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         // ...
 
-        // Set TextView text
-        tv_coinResult.setText(result);
+        // On définit le texte du TextView
+        tv_coinResult.setText("Coucou !");
     }
 ```
 
+Lancez votre application pour vérifier qu'elle fonctionne :
 
-Voici la fonction `coinFlip` à obtenir :
+![Application 1](screens/1_app_1.png)
+
+#### b) Lancement de la pièce
+
+On veut maintenant simuler le lancement de la pièce et mettre « Tail » ou « Head » dans le `TextView`.
+
+Nous allons ajouter à la classe une méthode `coinFlip()` qui va faire cela :
 
 ```java
-    public void coinFlip() {
-        // Random generation of a boolean in Java:
+    protected void coinFlip() {
+        // Génération aléatoire d'un booléen en Java
         Random randomGenerator = new Random();
         boolean random = randomGenerator.nextBoolean();
 
-        // Get labels in the resources:
+        // Récupération des string dans les ressources
         String tail = getString(R.string.tail);
         String head = getString(R.string.head);
 
-        // Result according to the random value
+        // Définition de la valeur selon le résultat
         String result = tail;
         if (random) {
             result = head;
         }
 
-        // Set TextView text
+        // Modification du composant graphique
         tv_coinResult.setText(result);
     }
 ```
 
-Il faut en suite appeler cette fonction dans la fonction `onCreate` (après avoir instancier le `TextView`) :
+Si une classe n'est pas connue par Android Studio, positionnez le curseur dessus et cliquez sur `<Alt>` + `<Entrée>`, le programme vous proposera d'importer ce qu'il manque (ici `java.util.Random`).
+
+Remarquez que l'en-tête de la méthode `coinFlip()` est grisé :
+
+![Méthode non utilisée](screens/5_ide_function_1.png)
+
+**Cette méthode n'est jamais appelée...**
+
+Il reste à appeler cette méthode depuis `onCreate` pour qu'elle soit automatiquement appelée au démarrage :
 
 ```java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        // ...
 
-        // I - Retrieve the graphical components
-        tv_coinResult = findViewById(R.id.tv_coin_result);
-
-        // III - Run other stuff
+        // On appelle coinFlip
         coinFlip();
     }
 ```
+
+La méthode `coinFlip()` maintenant être colorée, cliquez sur *1 usage* pour accéder à ses appels :
+
+![Méthode utilisée](screens/5_ide_function_2.png)
+
+Lancez votre application pour vérifier qu'elle fonctionne :
+
+![Application 2](screens/1_app_2.png)
 
 #### Le point à retenir
 
 La ligne la plus importante est :
 
 ```java
-        // Retrieve the TextView and store it in the class attribute
+        // Instanciation du TextView en attribut de classe
         tv_coinResult = findViewById(R.id.tv_coin_result);
 ```
 
 Cette ligne permet d'instancier en Java l'objet `TextView` correspondant au code XML écrit à l'étape **1)**.
-La fonction `findViewById` de signature `View findViewById(String id)` est fournie par l'API d'Android. Elle permet de récupérer n'importe quel élément d'une vue et d'en faire un objet Java. Cela permet de pouvoir agir sur l'objet via une fonction Java.
+La méthode `findViewById` de signature `View findViewById(String id)` est fournie par l'API d'Android. Elle permet de récupérer n'importe quel élément d'une vue et de l'instancier en Java. Cela permet de pouvoir agir sur l'objet via une méthode Java.
 
 
 #### Remarque sur les imports :
@@ -232,12 +235,7 @@ import java.util.Random;
 
 Vous utilisez des librairies, il faut donc les importer (Android Studio arrive très bien à vous proposer d'ajouter automatiquement les librairies les plus courantes, utilisez le `Alt+Entrer`).
 
-### 4) Lancement de l'application
-
-Connectez votre téléphone à l'ordinateur et lancez le programme dans Android Studio (`Maj+F10`).
-Android Studio ouvre une fenêtre : sélectionnez votre mobile. L'application doit se lancer sur votre téléphone !
-
-### 5) Ajout du bouton
+### 4) Ajout du bouton
 
 Votre programme fonctionne !
 
@@ -250,18 +248,17 @@ Il va falloir instancier le `Button` en objet Java (comme nous l'avons fait pour
 1. ajoutez une déclaration en attribut de classe pour stocker le bouton ;
 2. instancier le bouton dans la méthode `onCreate`.
 
-Maintenant, nous devons ajouter l'écouteur d'événement. Nous allons utiliser la fonction `setOnClickListener` :
+Maintenant, nous devons ajouter l'écouteur d'événement. Nous allons utiliser la méthode `setOnClickListener` :
 
 ```java
     protected void onCreate(Bundle savedInstanceState) {
         // ...
 
-        // II - Add Event Listener
-        // Add an anonymous "OnClickListener" event listener to the "Button" object "b_flip_coin"
+        // Ajout de l'écouteur d'événement
         b_flip_coin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Here we call the function that flip the coin
+                // On appel la méthode pour lancer la pièce
                 MainActivity.this.coinFlip();
             }
         });
@@ -272,9 +269,9 @@ Maintenant, nous devons ajouter l'écouteur d'événement. Nous allons utiliser 
 
 Dans ce code, est instancié un écouteur d'événement anonyme (non stocké dans une variable) et directement définit comme l'écouteur d'événement du bouton.
 
-La fonction `onClick` de cet écouteur est appelée au clic sur le bouton.
+La méthode `onClick` de cet écouteur est appelée au clic sur le bouton.
 
-On fait alors appel à la fonction qu'on a crée précédemment, attention, nous ne sommes plus dans la classe `MainActivity`, il ne faut pas faire simplement `this.coinFlip()`, mais `MainActivity.this.coinFlip()`.
+On fait alors appel à la méthode qu'on a crée précédemment, attention, nous ne sommes plus dans la classe `MainActivity`, il ne faut pas faire simplement `this.coinFlip()`, mais `MainActivity.this.coinFlip()`.
 
 Vous pouvez modifier le programme pour *ajouter* le dernier lancé au `TextView`... (Il faudra lors ajouter un `ScrollView` autour du `TextView`...)
 
@@ -282,6 +279,7 @@ Voici la structure globale attendue :
 
 ```java
 public class MainActivity extends AppCompatActivity {
+    // Déclaration des attributs de classe pour stocker les instances Java des composants graphiques
     TextView tv_coinResult;
     Button b_flip_coin;
 
@@ -290,47 +288,46 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // I - Retrieve the graphical components
+        // Instanciation des composants graphiques
         tv_coinResult = findViewById(R.id.tv_coin_result);
         b_flip_coin = findViewById(R.id.b_flip_coin);
 
-        // II - Add Event Listener
-        // Add an anonymous "OnClickListener" event listener to the "Button" object "b_coin_flip"
+        // Ajout de l'écouteur d'événement
         b_flip_coin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Here we call the function that flip the coin
+                // On appel la méthode pour lancer la pièce
                 MainActivity.this.coinFlip();
             }
         });
 
-        // III - Run other stuff
+        // On appelle coinFlip
         coinFlip();
     }
 
-    protected void coinFlip(){
-        // Random generation of a boolean in Java
+    protected void coinFlip() {
+        // Génération aléatoire d'un booléen en Java
         Random randomGenerator = new Random();
         boolean random = randomGenerator.nextBoolean();
 
-        // Get labels in the resources
+        // Récupération des string dans les ressources
         String tail = getString(R.string.tail);
         String head = getString(R.string.head);
 
-        // Result according to the random value
+        // Définition de la valeur selon le résultat
         String result = tail;
         if (random) {
             result = head;
         }
 
-        // Get previous content
+        // Récupération du contenu
         String previousContent = tv_coinResult.getText().toString();
         if (!previousContent.equals("")) {
-            previousContent = previousContent + '\n';
+            result = previousContent + '\n' + result;
         }
 
-        // Set TextView text
-        tv_coinResult.setText(previousContent + result);
+        // Modification du composant graphique
+        tv_coinResult.setText(result);
     }
 }
 ```
@@ -339,7 +336,7 @@ public class MainActivity extends AppCompatActivity {
 
 Il est possible d'avoir une vue différente selon l'orientation du téléphone.
 
-Ouvrez la vue, allez sur l'icône d'orientation et cliquez sur « Create landscape variation » :
+Ouvrez la vue, cliquez sur le nom du fichier et choisissez *Create landscape qualifier* :
 
 ![Orientation](screens/2_environnement_1_landscape.png)
 
@@ -387,7 +384,7 @@ On peut par exemple mettre le `LinearLayout` en orientation `horizontal`, et mod
 
 Relancez l'application et tournez le téléphone. Vous pouvez remarquer que le contenu est perdu.
 
-Comme dans l'exercice précédent, ajoutez des logs sur les fonctions liées au cycle de vie de l'activité :
+Comme dans l'exercice précédent, ajoutez des logs sur les méthodes liées au cycle de vie de l'activité :
 
 ```
 2020-01-01 01:01:01.176 8912-8912/fr.ign.twosidesofthecoin I/ENSG: onPause
@@ -400,7 +397,7 @@ Comme dans l'exercice précédent, ajoutez des logs sur les fonctions liées au 
 
 Vous pouvez remarquer que l'activité est totalement reconstruite.
 
-Pour conserver nos données, il faudra utiliser les fonctions `onSaveInstanceState` et `onRestoreInstanceState`.
+Pour conserver nos données, il faudra utiliser les méthodes `onSaveInstanceState` et `onRestoreInstanceState`.
 
 Ici on ne veut sauver (et récupérer) que le contenu de notre `TextView` :
 
@@ -408,7 +405,7 @@ Ici on ne veut sauver (et récupérer) que le contenu de notre `TextView` :
 public class MainActivity extends AppCompatActivity {
     // On déclare une constante qui servira de "clé"
     static final String TEXT_VIEW_CONTENT = "TEXT_VIEW_CONTENT";
-    
+
     // ...
 
     @Override
@@ -446,14 +443,17 @@ Il est possible d'**accéder aux éléments des vues depuis ces méthodes** pour
 Beaucoup de **composants graphiques** existent déjà pour vous aider à développer des interfaces riches rapidement.
 
 Pour **agir sur les composants graphiques** il faut :
-* **instancier des objets Java représentant ces composants** (via `findViewById`) ;
-* leur associer des **écouteurs d'événements**.
+* **déclare** des variables/attributs Java représentants ces composants** ;
+* **instancier** ces variables/attributs (via `findViewById`) ;
+* **utiliser** ces variables/attributs (leur associer des **écouteurs d'événements**, modifier les attributs, etc.).
+
+On peut créer des **variations de chaque vue d'activité** selon l'orientation de l'écran, le type d'appareil, etc.
 
 ## Organisation du code
 
 Pour ne pas faire d'erreur sur la déclaration et l'instanciation des composants graphique, je vous conseil fortement de :
-* déclarer toutes les variables de composants comme attributs de classe (vous pourrez simplement accéder à tous les composants dans toutes les fonctions de classe) ;
-* instancier tous les composants dès le début de la fonction `onCreate`;
+* déclarer toutes les variables de composants comme attributs de classe (vous pourrez simplement accéder à tous les composants dans toutes les méthode de classe) ;
+* instancier tous les composants dès le début de la méthode `onCreate`;
 * associer les écouteurs d'événement aux composants juste après.
 
 ## Projet complet
