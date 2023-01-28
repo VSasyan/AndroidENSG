@@ -93,7 +93,7 @@ Exemple :
 
 ### Les activités
 
-Ce sont des classes Java classiques mais elles permettent en plus de gérer l'interface avec l'utilisateur. Pour cela, vous devrez instancier les composants en objets Java.
+Ce sont des classes Java classiques mais elles permettent en plus de gérer l'interface utilisateur (Contrôleur). Pour cela, vous devrez instancier les composants en objets Java.
 
 Utilisez par exemple cette structure :
 
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
         // III - Autre traitement à effectuer au début...
     }
-    
+
     protected void askDayFunction() {
         // Récupération du pattern (depuis les ressources)
         String today_pattern = getString(R.string.today);
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
 ## Correction des problèmes couramment rencontrés
 
-![Tech Support Cheat Sheet - xkcd.com](https://imgs.xkcd.com/comics/tech_support_cheat_sheet.png "Tech Support Cheat Sheet - xkcd.com")
+[![Tech Support Cheat Sheet - xkcd.com](https://imgs.xkcd.com/comics/tech_support_cheat_sheet.png "Tech Support Cheat Sheet - xkcd.com")](https://xkcd.com/627/)
 
 ### Ressources (Gradle)
 

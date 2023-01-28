@@ -30,7 +30,7 @@ Le TP étant assez long, vous trouvez dans le dossier [ressources](ressources) d
 
 #### Events listeners
 
-Ajoutez à la classe `LoginActicity` :
+Ajoutez à la classe `LoginActivity` :
 * des attributs pour les composants graphiques à gérer sur cette fenêtre (voir le layout) ;
 * l'instanciation de ces composants graphiques en objet java ;
 * l'ajout des écouteurs d'événements :

@@ -1,9 +1,10 @@
 {
 	"cSpell.words": [
-		"Compat",
-		"Geocode",
 		"androidx",
 		"appcompat",
-		"constraintlayout"
+		"Compat",
+		"constraintlayout",
+		"Geocode",
+		"instanciables"
 	]
 }

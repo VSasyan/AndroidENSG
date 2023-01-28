@@ -1,14 +1,16 @@
-# Cours d'Android
+# Cours d'applications mobiles
 
 
 ## Introduction
 
 ### Objectifs
 
-* Bases de la programmation Android
-* Découverte d'Android Studio
-* Création de GUI
-* Cartographie sur mobiles
+* Les différents types d'application mobiles et leur OS
+* Bases de la programmation Android :
+    * Découverte d'Android Studio
+    * Création de GUI
+    * Cartographie sur mobiles
+    * Utilisation des capteurs
 
 ### Plan du cours
 
@@ -19,7 +21,7 @@
 
 Cette première partie regroupe tous les documents explicatifs : les présentations vues en cours et des documents à lire de votre côté qui détaillent un peu plus.
 
-* [Présentation d'Android](0_ressources/presentation_android.pdf) ;
+* [Introduction](0_ressources/introduction.pdf) ;
 * [Installation d'Android Studio](0_ressources/installation_android_studio.md) ;
 * [Android Studio](0_ressources/android_studio.md) ;
 * [Présentation Design Pattern](0_ressources/design_patterns.pptx) ([pdf](0_ressources/design_patterns.pdf)) et [Résumé Design Pattern](0_ressources/design_patterns.md).
@@ -51,18 +53,18 @@ Carte, géolocalisation et géo-codage avec les services Google.
 [Énoncé du TD](4_photo/README.md)
 
 
-## Utilisation de SQLite
-
-Une base de données pour les stocker toutes.
-
-[Énoncé du TD](5_sqlite/README.md)
-
-
 ## Les capteurs
 
 Un exemple avec l'accéléromètre.
 
-[Énoncé du TD](6_capteurs/README.md)
+[Énoncé du TD](5_capteurs/README.md)
+
+
+## Le stockage des données
+
+Une base de données pour les stocker toutes.
+
+[Énoncé du TD](6_sqlite/README.md)
 
 
 ## Résumé
