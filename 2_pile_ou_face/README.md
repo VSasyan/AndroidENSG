@@ -332,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-### Paysage
+### 5) Mode Paysage
 
 Il est possible d'avoir une vue différente selon l'orientation du téléphone.
 
@@ -431,6 +431,31 @@ public class MainActivity extends AppCompatActivity {
 Les [Bundle](https://developer.android.com/reference/kotlin/android/os/Bundle?hl=en) sont une classe spécialisée permettant de stocker des couples clef/valeur.
 
 Le contenu est alors correctement sauvé. Plus d'informations sur la [documentation](https://developer.android.com/guide/components/activities/activity-lifecycle#saras).
+
+### 6) Internationalisation
+
+Nous avons créé notre application en listant toutes les chaînes de caractères affichées à l'utilisateur dans le fichier de ressources adapté (`res/values/strings.xml`).
+
+Il est donc très facile de traduire l'application. Pour cela, ouvrez le fichier, Android Studio doit vous afficher un message vous proposant de traduire ou une petite ampoule pour ouvrir l'éditeur :
+
+![Message traduction](screens/6_inter_1.png)
+
+Si ce n'est pas le cas, ouvrez le volet *Resource Manager* à gauche, allez dans l'onglet *String*, cliquez sur une ressource et cliquez sur *Open Translations Editor* :
+
+![Volet Resource Manager](screens/6_inter_2.png)
+
+Une fois le *Translation Editor* ouvert, cliquez sur *Add Local* pour ajouter une traduction et choisissez le `French` par exemple :
+
+![Add Local](screens/6_inter_3.png)
+
+Android Studio va dédoubler le fichier strings.xml, il sera disponible dans sa version par défaut et dans la langue choisie :
+
+![French](screens/6_inter_4.png)
+
+Vous pouvez compléter les traductions via le *Translations Editor* ou le fichier XML.
+
+Pour tester que votre application est traduite, il faudra changer la langue du téléphone sur le simulateur (Settings => System => Languages and input => Languages => Add Language => Français => France, enfin passer le français au dessus).
+
 
 ## Les points à retenir
 
