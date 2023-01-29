@@ -24,7 +24,8 @@ Cette première partie regroupe tous les documents explicatifs : les présentati
 * [Introduction](0_ressources/introduction.pdf) ;
 * [Installation d'Android Studio](0_ressources/installation_android_studio.md) ;
 * [Android Studio](0_ressources/android_studio.md) ;
-* [Présentation Design Pattern](0_ressources/design_patterns.pptx) ([pdf](0_ressources/design_patterns.pdf)) et [Résumé Design Pattern](0_ressources/design_patterns.md).
+* [Présentation Design Pattern](0_ressources/design_patterns.pptx) ([pdf](0_ressources/design_patterns.pdf)) et [Résumé Design Pattern](0_ressources/design_patterns.md) ;
+* [Ressources de Yann](https://github.com/YannCaron/Android-ENSG) (02 Android, 03 IHM, ).
 
 
 ## Une première application
