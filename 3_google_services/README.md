@@ -29,6 +29,8 @@ Et nommez-la `PositionName` :
 
 ## Pas à pas des modifications
 
+L'application devient vite touffue... Pensez à regarder le [diagramme UML](uml/PositionName.png) de l'application pour avoir un résumé des signatures des fonctions à implémenter et le [diagramme de séquence](uml/sequence.png) pour mieux suivre l'enchaînement des fonctions.
+
 ### 1) Clef d'API
 
 A la création de votre projet, Android Studio doit vous ouvrir le fichier `app/manifests/AndroidManifest.xml`. Si ce n'est pas le cas, faites-le.
@@ -389,7 +391,7 @@ Enfin, nous allons compléter la fonction.
 ```
 Comme vous pouvez le voir, la récupération de la dernière position peut échouer, on a donc un écouteur d’événement qui gère le succès de l'opération et un autre l'échec...
 
-Modifier ce code pour que si la position est trouvée il ajout une autre balise sur la carte (vous pouvez par exemple créer une fonction `public void setLastLocationMarkerPosition(Location location)`, voir le [diagramme UML](uml/PositionName.png) pour avoir la liste des fonctions qu'il faudra créer).
+Modifier ce code pour que si la position est trouvée il ajout une autre balise sur la carte (vous pouvez par exemple créer une fonction `public void addLastLocationMarker(Location location)`, voir le [diagramme UML](uml/PositionName.png) pour avoir la liste des fonctions qu'il faudra créer).
 
 Voici un exemple de code attendu à l'issue de cet étape :
 
@@ -451,7 +453,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         // On a eu la dernière position, on vérifie qu'elle n'est pas nulle
                         if (location != null) {
                             Log.i("ENSG", "Position:" + location);
-                            MapsActivity.this.addLastLocationMarker(location);
+                            addLastLocationMarker(location);
                         } else {
                             Log.i("ENSG", "Position nulle...");
                         }
@@ -533,7 +535,7 @@ Ensuite, nous allons exécuter la requête de position et lui associer un *callb
 
 Comme vous pouvez le voir, le second paramètre de la fonction est un callback, donc une classe avec une fonction à exécuter lorsque la position est trouvée. Vous pouvez simplement le déclarer juste avant.
 
-Modifier le code de `onLocationResult` pour afficher et déplacer le marqueur de la position courante (créez par exemple une fonction `public void setCurrentLocationMarkerPosition(Location location)`).
+Modifier le code de `onLocationResult` pour afficher et déplacer le marqueur de la position courante (créez par exemple une fonction `public void setCurrentLocationMarkerLocation(Location location)`).
 
 Voici un exemple du code attendu :
 
@@ -598,7 +600,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         // On a eu la dernière position, on vérifie qu'elle n'est pas nulle
                         if (location != null) {
                             Log.i("ENSG", "Position:" + location);
-                            MapsActivity.this.addLastLocationMarker(location);
+                            addLastLocationMarker(location);
                         } else {
                             Log.i("ENSG", "Position nulle...");
                         }
@@ -637,7 +639,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onLocationResult(LocationResult locationResult) {
                 for (Location location : locationResult.getLocations()) {
                     Log.i("ENSG", "currentLocation : " + location);
-                    MapsActivity.this.setCurrentLocationMarkerPosition(location);
+                    setCurrentLocationMarkerLocation(location);
                 }
             };
         };
@@ -645,7 +647,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
     }
 
-    public void setCurrentLocationMarkerPosition(Location location) {
+    public void setCurrentLocationMarkerLocation(Location location) {
         // Est-ce que la carte est ok ?
         if (mMap != null) {
             LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
@@ -835,7 +837,7 @@ La fonction parait longue mais est en fait très simple :
 Dans votre classe d'activité, il faut ajouter un attribut de type `ResultReceiver` pour gérer la réception du résultat :
 
 ```java
-    private final ResultReceiver currentPositionResultReceiver = new ResultReceiver(new Handler()) {
+    private final ResultReceiver currentLocationResultReceiver = new ResultReceiver(new Handler()) {
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
 
@@ -843,12 +845,12 @@ Dans votre classe d'activité, il faut ajouter un attribut de type `ResultReceiv
             if (resultCode == FetchAddressIntentService.EXTRA_RESULT_SUCCESS) {
                 // Yes (result is address)
                 String result = resultData.getString(FetchAddressIntentService.EXTRA_RESULT_ADDRESS);
-                MapsActivity.this.setCurrentLocationMarkerTitle(result);
+                setCurrentLocationMarkerTitle(result);
                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
             } else {
                 // No (result is error message)
                 String message = resultData.getString(FetchAddressIntentService.EXTRA_RESULT_MESSAGE);
-                MapsActivity.this.setCurrentLocationMarkerTitle("");
+                setCurrentLocationMarkerTitle("");
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
             }
         }
@@ -859,7 +861,7 @@ On crée une fonction pour lancer l'appel au service de géocodage :
 
 ```java
     public void geocode(Location location) {
-        FetchAddressIntentService.startActionGeocode(this, location, currentPositionResultReceiver);
+        FetchAddressIntentService.startActionGeocode(this, location, currentLocationResultReceiver);
     }
 ```
 

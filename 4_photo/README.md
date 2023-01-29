@@ -21,7 +21,7 @@ L'application sera composée d'un écran permettant de visualiser et prendre une
 
 ## Mise en place
 
-Créer un nouveau projet appelé `CameraX` avec une première activité de type **Empty Activity** nommée `MainActivity`.
+Créez un nouveau projet appelé `CameraX` avec une première activité de type **Empty Activity** nommée `MainActivity`.
 
 ## Pas à pas des modifications
 
@@ -44,7 +44,7 @@ dependencies {
 }
 ```
 
-Vérifiez que dans le bloc "android" soit bien indiqué de compiler avec Java 8 :
+Vérifiez que dans le bloc "android" se soit bien indiqué de compiler avec Java 8 :
 
 ```js
 android {
@@ -57,7 +57,7 @@ android {
 }
 ```
 
-A la fin du bloc "android" ajoutez la buildFeature `viewBinding` :
+A la fin du bloc "android" ajoutez la *buildFeature* `viewBinding` :
 
 ```js
 android {
@@ -149,7 +149,7 @@ Et créez la méthode `startCamera()` :
     }
 ```
 
-Essayez de lancer l'application. A ce stade elle doit demander l'autorisation et loguer que c'est ok.
+Essayez de lancer l'application. A ce stade elle doit demander l'autorisation et on doit voir le log de la fonction `startCamera`.
 
 
 ### 4) Prévisualisation
@@ -219,7 +219,7 @@ Deux choix s'offrent à nous :
 
 Pour pouvoir insérer un fichier, nous avons besoin de le décrire : donner son nom, donner son type (image, vidéo, audio, ...). Cela permet au système de le référencer.
 
-NB : il faudrait gérer l'ancienne méthode de création de fichiers pour les utilisateurs avant Android 10. Nous n'allons pas faire cela ici.
+NB : il faudrait gérer l'ancienne méthode de création de fichiers pour les utilisateurs avant Android 10 (et là nous aurions besoin de l'autorisation d'écriture pour écrire en dehors de la zone réservée). Nous n'allons pas faire cela ici.
 
 Ajoutez la méthode `takePicture` à votre classe `MainActivity` :
 

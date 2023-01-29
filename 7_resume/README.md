@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Appel d'une méthode de la classe d'activité
-                MainActivity.this.askDayFunction();
+                askDayFunction();
             }
         });
 

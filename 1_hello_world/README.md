@@ -34,6 +34,8 @@ Regardez la structure du projet créé par Android Studio :
 
 Nous allons regarder les fichiers `manifests/AndroidManifest.xml`, `java/MainActivity`, et `res/layout/activity_main.xml` (en mode Design et Text) :
 
+### Android Manifest
+
 ![Structure du projet - Android Manifest](screens/2_environnement_2_manifest.png)
 
 Un fichier [AndroidManifest.xml](https://developer.android.com/guide/topics/manifest/manifest-intro) a été généré, il contient notamment :
@@ -42,9 +44,13 @@ Un fichier [AndroidManifest.xml](https://developer.android.com/guide/topics/mani
 * la liste des composants (activités, services, ...) ;
 * les autorisations (pour le moment aucune).
 
+### Android MainActivity
+
 ![Structure du projet - MainActivity.java](screens/2_environnement_3_MainActivity.png)
 
 Ce fichier contient la classe Java associée à l'activité principale de l'application. C'est son contrôleur, qui permet de gérer les interactions de l'utilisateur et de faire vivre la vue associée (la créer, afficher des informations, ...).
+
+### Android activity_main
 
 ![Structure du projet - activity_main.xml - Design](screens/2_environnement_4_activity_main_design.png)
 
@@ -52,13 +58,23 @@ Ce fichier contient la classe Java associée à l'activité principale de l'appl
 
 Ce fichier permet de créer l'interface graphique qui sera affichée à l'ouverture, vous pouvez l'éditer en mode design ou en mode texte.
 
+### Gradle "Module"
+
+![Gradle "Module"](screens/2_environnement_8_gradle_2.png)
+
+Ce fichier liste les instructions de compilation et les dépendances. Il est exploité par Gradle qui est l'outil de construction du projet.
+
+Vous pouvez également voir le numéro de SDK ciblé par notre application. Une version trop ancienne d'Android ne pourrait pas la faire tourner.
+
+### Premier lancement !
+
 Vous pouvez lancer l'application (voir [Utiliser les émulateurs](../0_ressources/utiliser_emulateurs.md) pour créer un émulateur) :
 
 ![Run App](screens/2_environnement_7_run_app.png)
 
 Si rien en se passe, regardez en bas à droite, Gradle doit être en train de compiler votre projet :
 
-![Gradle compile](screens/2_environnement_8_gradle.png)
+![Gradle compile](screens/2_environnement_8_gradle_1.png)
 
 ## Les activités
 
@@ -139,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-La classe `Log` ne doit pas être importée par défaut. Positionnez votre curseur sur le mot-clef `Log` en rouge en cliquez sur `<Alt>` + `<Entrée>` pour importer automatiquement.
+La classe `Log` ne doit pas être importée par défaut. Positionnez votre curseur sur le mot-clef `Log` en rouge et appuyez sur `<Alt>` + `<Entrée>` pour importer automatiquement.
 
 Vous pouvez alors lancer l'application en allant dans l'onglet **Logcat** et en entrant « ENSG » (ou le tag que vous avez utilisé) dans le filtre. Quittez et ré-ouvrez l'application avant de la fermer via le gestionnaire. Regardez les logs :
 

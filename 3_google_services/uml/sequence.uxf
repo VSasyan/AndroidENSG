@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
-  <zoom_level>8</zoom_level>
+<diagram program="umlet" version="14.2">
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>792</x>
-      <y>624</y>
-      <w>80</w>
-      <h>24</h>
+      <x>616</x>
+      <y>553</y>
+      <w>70</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>MapsActivity</panel_attributes>
     <additional_attributes/>
@@ -15,10 +15,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1112</x>
-      <y>640</y>
-      <w>24</w>
-      <h>552</h>
+      <x>896</x>
+      <y>567</y>
+      <w>21</w>
+      <h>483</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;670.0</additional_attributes>
@@ -26,10 +26,10 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>912</x>
-      <y>624</y>
-      <w>80</w>
-      <h>24</h>
+      <x>721</x>
+      <y>553</y>
+      <w>70</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>Receiver</panel_attributes>
     <additional_attributes/>
@@ -37,10 +37,10 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1032</x>
-      <y>624</y>
-      <w>184</w>
-      <h>24</h>
+      <x>826</x>
+      <y>553</y>
+      <w>161</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>FetchAddresssIntentService</panel_attributes>
     <additional_attributes/>
@@ -48,10 +48,10 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>824</x>
-      <y>648</y>
-      <w>16</w>
-      <h>528</h>
+      <x>644</x>
+      <y>574</y>
+      <w>14</w>
+      <h>462</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -59,10 +59,10 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>944</x>
-      <y>648</y>
-      <w>16</w>
-      <h>528</h>
+      <x>749</x>
+      <y>574</y>
+      <w>14</w>
+      <h>462</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -70,10 +70,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>832</x>
-      <y>920</y>
-      <w>296</w>
-      <h>32</h>
+      <x>651</x>
+      <y>812</y>
+      <w>259</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 startActionGeocode</panel_attributes>
@@ -82,10 +82,10 @@ startActionGeocode</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>952</x>
-      <y>936</y>
-      <w>176</w>
-      <h>32</h>
+      <x>756</x>
+      <y>826</y>
+      <w>154</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 onReceiveResult</panel_attributes>
@@ -94,10 +94,10 @@ onReceiveResult</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>632</x>
-      <y>624</y>
-      <w>96</w>
-      <h>24</h>
+      <x>476</x>
+      <y>553</y>
+      <w>84</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>mapFragment</panel_attributes>
     <additional_attributes/>
@@ -105,10 +105,10 @@ onReceiveResult</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>680</x>
-      <y>656</y>
-      <w>160</w>
-      <h>32</h>
+      <x>518</x>
+      <y>581</y>
+      <w>140</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 getMapAsync
@@ -118,10 +118,10 @@ fg=gray</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>672</x>
-      <y>648</y>
-      <w>16</w>
-      <h>64</h>
+      <x>511</x>
+      <y>574</y>
+      <w>14</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -129,10 +129,10 @@ fg=gray</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>680</x>
-      <y>680</y>
-      <w>160</w>
-      <h>32</h>
+      <x>518</x>
+      <y>602</y>
+      <w>140</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 onMapReady
@@ -142,10 +142,10 @@ fg=gray</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>456</x>
-      <y>624</y>
-      <w>144</w>
-      <h>24</h>
+      <x>322</x>
+      <y>553</y>
+      <w>126</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>mFusedLocationClient</panel_attributes>
     <additional_attributes/>
@@ -153,10 +153,10 @@ fg=gray</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>528</x>
-      <y>720</y>
-      <w>312</w>
-      <h>32</h>
+      <x>385</x>
+      <y>637</y>
+      <w>273</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 getLastLocation</panel_attributes>
@@ -165,10 +165,10 @@ getLastLocation</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>520</x>
-      <y>648</y>
-      <w>16</w>
-      <h>528</h>
+      <x>378</x>
+      <y>574</y>
+      <w>14</w>
+      <h>462</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -176,10 +176,10 @@ getLastLocation</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>280</x>
-      <y>624</y>
-      <w>136</w>
-      <h>24</h>
+      <x>168</x>
+      <y>553</y>
+      <w>119</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>OnSuccessListener</panel_attributes>
     <additional_attributes/>
@@ -187,10 +187,10 @@ getLastLocation</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>336</x>
-      <y>728</y>
-      <w>16</w>
-      <h>72</h>
+      <x>217</x>
+      <y>644</y>
+      <w>14</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -198,10 +198,10 @@ getLastLocation</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>344</x>
-      <y>736</y>
-      <w>192</w>
-      <h>32</h>
+      <x>224</x>
+      <y>651</y>
+      <w>168</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 onSuccess</panel_attributes>
@@ -210,22 +210,22 @@ onSuccess</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>344</x>
-      <y>768</y>
-      <w>496</w>
-      <h>32</h>
+      <x>224</x>
+      <y>679</y>
+      <w>434</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-setLastLocationMarkerPosition</panel_attributes>
+addLastLocationMarker</panel_attributes>
     <additional_attributes>600.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>528</x>
-      <y>824</y>
-      <w>312</w>
-      <h>32</h>
+      <x>385</x>
+      <y>728</y>
+      <w>273</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 requestLocationUpdates
@@ -236,10 +236,10 @@ fg=gray</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>112</x>
-      <y>624</y>
-      <w>144</w>
-      <h>24</h>
+      <x>21</x>
+      <y>553</y>
+      <w>126</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>locationCallback</panel_attributes>
     <additional_attributes/>
@@ -247,10 +247,10 @@ fg=gray</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>176</x>
-      <y>648</y>
-      <w>16</w>
-      <h>528</h>
+      <x>77</x>
+      <y>574</y>
+      <w>14</w>
+      <h>462</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -258,10 +258,10 @@ fg=gray</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>184</x>
-      <y>856</y>
-      <w>352</w>
-      <h>32</h>
+      <x>84</x>
+      <y>756</y>
+      <w>308</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 onLocationResult
@@ -271,23 +271,23 @@ fg=gray</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>184</x>
-      <y>888</y>
-      <w>656</w>
-      <h>32</h>
+      <x>84</x>
+      <y>784</y>
+      <w>574</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-setCurrentLocationMarkerPosition
+setCurrentLocationMarkerLocation
 fg=gray</panel_attributes>
     <additional_attributes>800.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>184</x>
-      <y>904</y>
-      <w>656</w>
-      <h>32</h>
+      <x>84</x>
+      <y>798</y>
+      <w>574</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 geocode
@@ -297,10 +297,10 @@ fg=gray</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>672</x>
-      <y>704</y>
-      <w>24</w>
-      <h>488</h>
+      <x>511</x>
+      <y>623</y>
+      <w>21</w>
+      <h>427</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;590.0</additional_attributes>
@@ -308,10 +308,10 @@ fg=gray</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>336</x>
-      <y>640</y>
-      <w>24</w>
-      <h>552</h>
+      <x>217</x>
+      <y>567</y>
+      <w>21</w>
+      <h>483</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;670.0</additional_attributes>
@@ -319,10 +319,10 @@ fg=gray</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>176</x>
-      <y>640</y>
-      <w>24</w>
-      <h>552</h>
+      <x>77</x>
+      <y>567</y>
+      <w>21</w>
+      <h>483</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;670.0</additional_attributes>
@@ -330,10 +330,10 @@ fg=gray</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1112</x>
-      <y>904</y>
-      <w>16</w>
-      <h>64</h>
+      <x>896</x>
+      <y>798</y>
+      <w>14</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>

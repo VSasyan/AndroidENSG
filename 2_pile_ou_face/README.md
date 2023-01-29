@@ -233,7 +233,7 @@ import android.widget.TextView;
 import java.util.Random;
 ```
 
-Vous utilisez des librairies, il faut donc les importer (Android Studio arrive très bien à vous proposer d'ajouter automatiquement les librairies les plus courantes, utilisez le `Alt+Entrer`).
+Vous utilisez des librairies, il faut donc les importer (Android Studio arrive très bien à vous proposer d'ajouter automatiquement les librairies les plus courantes, utilisez le `Alt+Entrée`).
 
 ### 4) Ajout du bouton
 
@@ -258,8 +258,8 @@ Maintenant, nous devons ajouter l'écouteur d'événement. Nous allons utiliser 
         b_flip_coin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // On appel la méthode pour lancer la pièce
-                MainActivity.this.coinFlip();
+                // On appelle la méthode pour lancer la pièce
+                coinFlip();
             }
         });
 
@@ -271,7 +271,7 @@ Dans ce code, est instancié un écouteur d'événement anonyme (non stocké dan
 
 La méthode `onClick` de cet écouteur est appelée au clic sur le bouton.
 
-On fait alors appel à la méthode qu'on a crée précédemment, attention, nous ne sommes plus dans la classe `MainActivity`, il ne faut pas faire simplement `this.coinFlip()`, mais `MainActivity.this.coinFlip()`.
+On fait alors appel à la méthode qu'on a crée précédemment.
 
 Vous pouvez modifier le programme pour *ajouter* le dernier lancé au `TextView`... (Il faudra lors ajouter un `ScrollView` autour du `TextView`...)
 
@@ -296,8 +296,8 @@ public class MainActivity extends AppCompatActivity {
         b_flip_coin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // On appel la méthode pour lancer la pièce
-                MainActivity.this.coinFlip();
+                // On appelle la méthode pour lancer la pièce
+                coinFlip();
             }
         });
 
