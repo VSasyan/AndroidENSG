@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>20</y>
+      <w>410</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>PhysicalEngine
+--
+-sensorManager: SensorManager 
+-accelerometer: Sensor
+-ball: Ball
+-sensorEventListener: SensorEventListener
+--
+PhysicalEngine(Activity activity, Ball ball)
+--
+moveBall(float accelerationX, float accelerationY): void
+startEngine()
+stopEngine()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>380</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>Ball
+--
++RADIUS: float (20)
++MAX_SPEED: float (20)
++SPEED_FACTOR: float (0.95f)
++ACCELERATION_FACTOR: float (0.2f)
+--
+-maxX: float
+-maxY: float
+-x: float
+-y: float
+-speedX: float
+-speedY: float
+--
++getX(): float
++getY(): float
++setMaxX(float maxX): void
++setMaxY(float maxY): void
+--
++acceleration(float accelerationX, float accelerationY): void
++move(): void
++checkPosition(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>220</y>
+      <w>410</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>GraphicalEnginengine
+--
+-ball: Ball
+-surfaceHolder: SurfaceHolder 
+-drawingThread: Thread
+-ballPaint: Paint
+--
+GraphicalEngine(Ball ball)
+--
+surfaceCreated(SurfaceHolder surfaceHolder)
+surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2)
+surfaceDestroyed(SurfaceHolder surfaceHolder)
+draw(Canvas canvas)</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

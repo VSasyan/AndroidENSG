@@ -25,21 +25,21 @@ Dans le fichier `AndroidManifest.xml`, ajoutez la balise `uses-feature` ci-desso
 
     <uses-feature android:name="android.hardware.sensor.accelerometer"
         android:required="true" />
-        
+
     <!-- ... -->
 
 </manifest>
 ```
 
-Ajoutez également un attribut `android:screenOrientation` valant `portrait` à la balise `activity` pour bloquer sa rotation.
+Ajoutez également un attribut `android:screenOrientation` valant `unspecified` à la balise `activity` pour bloquer sa rotation.
 
-Créer deux 3 classes pour le moment vides :
+Créer 3 classes pour le moment vides :
 
 * `PhysicalEngine` : pour gérer la physique du projet ;
 * `GraphicalEngine` pour gérer l'affichage du projet ;
 * `Ball` : pour représenter la balle.
 
-Ces classes seront instanciées dans la fonction `onCreate` de votre activité et les deux moteurs (graphique et physique) seront stockés dans des attributs de classe.
+Ces classes seront instanciées dans la fonction `onCreate` de votre activité et les deux moteurs (graphique et physique) seront stockés dans des attributs de classe, la balle pourra être une simple variable.
 
 
 ## Accéder aux informations du capteur
@@ -58,6 +58,10 @@ Ajoutez comme attributs de classe un `SensorManager sensorManager` et un `Sensor
 
 ### Mise en place
 
+Un diagramme UML des classes manipulées est disponible pour vous guider :
+
+[![Diagramme UML](uml/RollingBall.png)](uml/RollingBall.png)
+
 #### Récupération du capteur
 
 Le code suivant permet de récupérer le gestionnaire de capteurs et l'accéléromètre :
@@ -72,8 +76,8 @@ Il sera exécuté dans le *constructeur* du moteur physique.
 Le constructeur prendra en paramètre une activité et une balle :
 
 ```java
-public class PhysicalEngine { 
-    
+public class PhysicalEngine {
+
     // ...
 
     PhysicalEngine(Activity activity, Ball ball) {
@@ -86,7 +90,7 @@ Stockez également l'objet `Ball` dans un attribut de la classe.
 
 #### Déclaration de l'écouteur d'événement
 
-Nous auront en suite besoin d'un écouteur d'événement.
+Nous auront ensuite besoin d'un écouteur d'événement.
 
 Cet écouteur sera un *attribut de la classe*, il va appeler une fonction `protected void moveBall(float accelerationX, float accelerationY)` que nous compléterons plus tard.
 
@@ -132,6 +136,7 @@ public class PhysicalEngine {
 
     private void moveBall(float accelerationX, float accelerationY) {
         Log.i("ENSG", String.format("moveBall %f %f", accelerationX, accelerationY));
+        // TODO à compléter plus tard !
     }
 
     // ...
@@ -142,22 +147,31 @@ Lancez l'application et regardez le logcat...
 
 On ne récupère pas l'axe Z, donc si vous posez votre téléphone sur la table les deux valeurs doivent être proches de 0. Si vous tournez le téléphone (pour aligner l'axe X ou l'axe Y sur l'axe Z), la valeur de l'accélération doit vous rappeler quelque chose.
 
+Téléphone "posé" :
+
+![Téléphone "posé"](img/log_2.png)
+
+Téléphone debout (Z sur l'axe Y) :
+
+![Téléphone debout](img/log_1.png)
+
 ## La balle
 
-Complétez la classe `Ball` selon l'UML suivant :
+Complétez la classe `Ball` selon l'UML suivant (pensez à utiliser `<Alt>`+`<Inser>` pour générer les Getters/Setters) :
 
-![Classe Ball](uml/Ball.png)
+![Diagramme UML](uml/RollingBall.png)
 
 Fonction :
 
-* `acceleration` : met à jour les vitesses (pondérées par `ACCELERATION_FACTOR`) ;
+* `acceleration` : met à jour les vitesses (pondérées par `ACCELERATION_FACTOR` et `SPEED_FACTOR` et sans dépasser `MAX_SPEED`) ;
 * `move` : met à jour les positions et appelle `checkPosition` ;
-* `checkPosition` : si la balle doit sortir du cadre, elle rebondit.
+* `checkPosition` : si la balle doit sortir du cadre, elle rebondit ;
+* `setMaxY` et `setMaxY` doivent également recentrer la balle.
 
 
 ## Affichage de la balle
 
-Ces modifications concernent le moteur graphique (classe `GraphicalEngine`).
+Ces modifications concernent le moteur graphique (classe `GraphicalEngine`) et un peu la `MainActivity`.
 
 ### SurfaceView
 
@@ -165,7 +179,7 @@ L'affichage de la balle se fera sur le `SurfaceView`.
 
 Cet élément nous fournira un objet de type `SurfaceHolder`. C'est à cet élément qu'il faudra lier notre moteur graphique.
 
-Notre moteur graphique doit implémenter l'interface `SurfaceHolder.Callback` : complétez sa déclaration.
+Notre moteur graphique doit **implémenter** l'interface `SurfaceHolder.Callback` : complétez sa déclaration.
 
 AndroidStudio doit vous afficher un message d'erreur :
 
@@ -193,9 +207,9 @@ Maintenant, il faut compléter les 3 fonctions de callback de notre moteur graph
 
 Quand la surface est :
 
-* créé : il faut stocker la variable passée en paramètre dans une variable de classe `surfaceHolder` puis créer et lancer un thread (voir point suivant, ajoutez juste un commentaire pour le moment) ;
-* détruite : il faut interrompre le thread (voir point suivant, ajoutez juste un commentaire pour le moment) et définir comme égale à `null` notre variable de classe `surfaceHolder` ;
-* changée : il faut mettre à jour la variable de classe `surfaceHolder`, mettre à jour les attributs `maxX` et `maxY` de notre balle (grâce à `i1` et `i2`, respectivement) et vérifier la position de la balle.
+* créé : il faut stocker la variable passée en paramètre dans une variable de classe `surfaceHolder` puis créer et lancer un thread (voir point suivant, ajoutez juste un TODO pour le moment) ;
+* détruite : il faut interrompre le thread (voir point suivant, ajoutez juste un TODO pour le moment) et définir comme égale à `null` notre variable de classe `surfaceHolder` ;
+* changée : il faut mettre à jour la variable de classe `surfaceHolder`, mettre à jour les attributs `maxX` et `maxY` de notre balle (grâce à `i1` et `i2`, respectivement) et mettre la balle au milieu.
 
 #### Thread
 
@@ -247,7 +261,7 @@ public class GraphicalEngine implements SurfaceHolder.Callback {
 
 Complétez également la fonction `surfaceDestroyed` avec le code d'interruption du thread : `drawingThread.interrupt();`.
 
-Créez également la méthode `private void draw(Canvas canvas)`.
+Créez la méthode `private void draw(Canvas canvas)`.
 
 Le thread tente de verrouiller le canevas (`Canvas`) de la surface.
 
@@ -260,26 +274,51 @@ Enfin, le thread libère le canevas et patiente un peu...
 Complétez le code de la fonction `draw` :
 
 * la fonction [drawColor](https://developer.android.com/reference/android/graphics/Canvas#drawColor(long,%20android.graphics.BlendMode)) permet de colorier tout le `Canvas` ;
-* la fonction [drawCircle](https://developer.android.com/reference/android/graphics/Canvas.html#drawCircle(float,%20float,%20float,%20android.graphics.Paint)) permet de déssiner un cercle sur le `Canvas`.
+* la fonction [drawCircle](https://developer.android.com/reference/android/graphics/Canvas.html#drawCircle(float,%20float,%20float,%20android.graphics.Paint)) permet de dessiner un cercle sur le `Canvas`.
 
-Il faudra utiliser un objet [Paint](https://developer.android.com/reference/android/graphics/Paint.html) :
+Il faudra utiliser un objet [Paint](https://developer.android.com/reference/android/graphics/Paint.html) avec `drawCircle` :
 
 ```java
 Paint paint = new Paint();
 paint.setColor(Color.RED);
 ```
 
+Je l'ai personnellement mis en attribut de classe histoire de ne pas le ré-instancier à chaque colorisation.
+
 ### Lancez l'application !
 
 Normalement l'application devrait fonctionner, et la balle devrait rouler...
 
-Vous pouvez [passer l'application en plein écran](https://developer.android.com/training/system-ui/immersive).
+Vous pouvez [passer l'application en plein écran](https://developer.android.com/training/system-ui/immersive) :
+
+```java
+    protected void onCreate(Bundle savedInstanceState) {
+        // ...
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            final WindowInsetsController insetsController = getWindow().getInsetsController();
+            if (insetsController != null) {
+                insetsController.hide(WindowInsets.Type.statusBars());
+            }
+        } else {
+            supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+            getWindow().setFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN
+            );
+        }
+    }
+```
 
 ## Les points à retenir
 
 On doit utiliser le `SensorManager` pour accéder aux capteurs du téléphone.
 
-Cela demande d'ajouter une autorisation dans le fichier `AndroidManifest.xml`.
+Cela demande d'ajouter une autorisation dans le fichier `AndroidManifest.xml` (mais pas besoin de demander des autorisations à l'exécution !).
 
 Il faut encore utiliser un écouteur d'événement pour récupérer l'information.
 
