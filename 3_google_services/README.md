@@ -842,14 +842,14 @@ Dans votre classe d'activité, il faut ajouter un attribut de type `ResultReceiv
         protected void onReceiveResult(int resultCode, Bundle resultData) {
 
             // Is success?
-            if (resultCode == FetchAddressIntentService.EXTRA_RESULT_SUCCESS) {
+            if (resultCode == FetchAddressIntentService.CODE_SUCCESS) {
                 // Yes (result is address)
-                String result = resultData.getString(FetchAddressIntentService.EXTRA_RESULT_ADDRESS);
+                String result = resultData.getString(FetchAddressIntentService.RESULT_ADDRESS);
                 setCurrentLocationMarkerTitle(result);
                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
             } else {
                 // No (result is error message)
-                String message = resultData.getString(FetchAddressIntentService.EXTRA_RESULT_MESSAGE);
+                String message = resultData.getString(FetchAddressIntentService.RESULT_MESSAGE);
                 setCurrentLocationMarkerTitle("");
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
             }
