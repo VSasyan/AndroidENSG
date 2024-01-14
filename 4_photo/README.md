@@ -31,7 +31,7 @@ Ouvrez le fichier `build.gradle (Module: app)` et ajoutez les dépendances :
 
 ```js
 dependencies {
-    def camerax_version = "1.2.1"
+    def camerax_version = "1.1.0"
     implementation "androidx.camera:camera-core:${camerax_version}"
     implementation "androidx.camera:camera-camera2:${camerax_version}"
     implementation "androidx.camera:camera-lifecycle:${camerax_version}"
@@ -72,7 +72,7 @@ Synchronisez Gradle.
 
 ### 2) Affichage
 
-Nous allons créer une activité avec un composant PreviewView permettant d'afficher l'image captée par l'appareil et un bouton pour prendre la photo. Reprenez le code suivant :
+Nous allons créer une activité avec un composant PreviewView permettant d'afficher l'image captée par l'appareil et un bouton pour prendre la photo. Reprenez le code suivant (**créez les ressources manquantes !**) :
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -116,7 +116,7 @@ Pour prendre des photos, vous avez besoin de deux autorisations (à ajouter avan
     <uses-permission android:name="android.permission.CAMERA" />
 ```
 
-Déclarer la permission ne suffit pas. Il faudra également ajouter un code pour activer cette permission. Dans la fonction `onCreate`, ajouter le code suivante :
+Déclarer la permission ne suffit pas. Il faudra également ajouter un code pour activer cette permission. Dans la fonction `onCreate`, ajouter le code suivante (**créez les ressources manquantes !**) :
 
 ```java
     @Override
@@ -134,7 +134,7 @@ Déclarer la permission ne suffit pas. Il faudra également ajouter un code pour
                             startCamera();
                         }
                     });
-            requestPermissionLauncher.launch(Manifest.permission.CAMERA);
+            requestPermissionLauncher.launch(android.Manifest.permission.CAMERA);
         } else {
             startCamera();
         }
@@ -194,11 +194,11 @@ Ajoutez le code suivant dans la fonction `startCamera()` :
                     // On crée le lien avec notre previsualisation
                     cameraProvider.bindToLifecycle(MainActivity.this, cameraSelector, preview, imageCapture);
                 } catch (ExecutionException e) {
-                    Log.e(TAG, "ExecutionException failure", e);
+                    Log.e("ENSG", "ExecutionException failure", e);
                 } catch (InterruptedException e) {
-                    Log.e(TAG, "InterruptedException failure", e);
+                    Log.e("ENSG", "InterruptedException failure", e);
                 } catch (Exception e) {
-                    Log.e(TAG, "Use case binding failed", e);
+                    Log.e("ENSG", "Use case binding failed", e);
                 }
             }
         }, getMainExecutor());
