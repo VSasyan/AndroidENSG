@@ -48,7 +48,7 @@ Ces modifications concernent le moteur physique (classe `PhysicalEngine`).
 
 ### Présentations
 
-Pour accéder aux données, nous auront besoin de trois objets :
+Pour accéder aux données, nous aurons besoin de trois objets :
 
 * un `SensorManager` : qui permet de récupérer les différents capteurs ;
 * un `Sensor` : qui représente un capteur (pour nous l'accéléromètre) ;
@@ -90,7 +90,7 @@ Stockez également l'objet `Ball` dans un attribut de la classe.
 
 #### Déclaration de l'écouteur d'événement
 
-Nous auront ensuite besoin d'un écouteur d'événement.
+Nous aurons ensuite besoin d'un écouteur d'événement.
 
 Cet écouteur sera un *attribut de la classe*, il va appeler une fonction `protected void moveBall(float accelerationX, float accelerationY)` que nous compléterons plus tard.
 
@@ -109,13 +109,13 @@ Cet écouteur sera un *attribut de la classe*, il va appeler une fonction `prote
 
 #### Inscription/désinscription de l'écouteur d'événement
 
-Quand l'*activité est active*, nous auront besoin d'inscrire l'écouteur d'événement.
+Quand l'*activité est active*, nous aurons besoin d'inscrire l'écouteur d'événement.
 
-Quand l'*activité est mise en pause*, nous auront besoin de désinscrire l'écouteur d'événement.
+Quand l'*activité est mise en pause*, nous aurons besoin de désinscrire l'écouteur d'événement.
 
 Pour cela nous allons utiliser les fonctions [registerListener](https://developer.android.com/reference/android/hardware/SensorManager.html#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int)) et [unregisterListener](https://developer.android.com/reference/android/hardware/SensorManager.html#unregisterListener(android.hardware.SensorEventListener,%20android.hardware.Sensor)) de notre [sensorManager](https://developer.android.com/reference/android/hardware/SensorManager.html).
 
-Nous auront également besoin notre écouteur d'événement `sensorEventListener`, de notre capteur `accelerometer` et d'une fréquence de rafraîchissement (par exemple `SensorManager.SENSOR_DELAY_GAME`).
+Nous aurons également besoin notre écouteur d'événement `sensorEventListener`, de notre capteur `accelerometer` et d'une fréquence de rafraîchissement (par exemple `SensorManager.SENSOR_DELAY_GAME`).
 
 Créez les fonctions :
 
