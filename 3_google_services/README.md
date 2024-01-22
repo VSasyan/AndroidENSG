@@ -48,7 +48,7 @@ MAPS_API_KEY=AIzaSyBRR1tCxqn8PJqtDX1e0mE7___________
 
 (La fin de la clef vous sera communiquée en direct.)
 
-Dans le fichier AndroidManifest, on ne fait que référence à la déclaration précédente :
+Dans le fichier AndroidManifest, on ne fait que référence à la variable déclarée précédemment :
 
 ```xml
         <meta-data
@@ -144,7 +144,7 @@ Dans un deuxième temps, regardons le code du fichier `activity_maps.xml` décri
 
 Comme vous pouvez le voir, il n'y a qu'un fragment, qui est un composant spécial permettant de réutiliser des vues. [Plus d'information.](https://developer.android.com/guide/components/fragments.html)
 
-Cela permet de réutiliser certaines partie d'interfaces graphiques. En l’occurrence, nous réutilisons le composant graphique de carte fourni par l'API.
+Cela permet de réutiliser certaines parties d'interfaces graphiques. En l’occurrence, nous réutilisons le composant graphique de carte fourni par l'API.
 
 #### c) Java
 
@@ -268,7 +268,7 @@ Nous allons maintenant tenter d'afficher la position de l'utilisateur sur la car
 
 La carte fournie par Google est bien évidement déjà capable de le faire.... L'intérêt de le faire par nous même est de pouvoir récupérer les coordonnées GPS de l'utilisateur, pour ensuite trouver son adresse.
 
-Il a deux manières principales de récupérer la position du client ([documentation](https://developer.android.com/training/location/index.html)) :
+Il y a deux manières principales de récupérer la position du client ([documentation](https://developer.android.com/training/location/index.html)) :
 * récupérer la dernière position connue ;
 * demander un suivi de position.
 
@@ -327,9 +327,11 @@ Dans la fonction `onCreate`, à la fin du code déjà existant, ajoutez le code 
 
 Une fois que l'autorisation sera obtenue, nous pouvons lancer la géolocalisation.
 
-#### a) Première méthode
+#### b) Modification du code
 
-Ajoutez un `FusedLocationProviderClient` en attribut de classe permettant d'accéder à l'API :
+Nous allons uniquement implémenter la seconde méthode.
+
+Il faudra ajoutez un `FusedLocationProviderClient` en attribut de classe. C'est lui qui nous permet d'accéder à l'API :
 
 ```java
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -353,154 +355,11 @@ Ensuite, dans la suite de la fonction `onCreate`, il va falloir instancier ce cl
     }
 ```
 
-Maintenant nous allons tenter de récupérer la position. Créez une nouvelle fonction de classe appelée `getLastLocation` et modifier le code précédent pour qu'elle soit appelée quand l'autorisation est vérifiée.
+Maintenant, nous allons afficher un 2nd marqueur « Current position » donnant la position actuelle de l'utilisateur.
 
-Enfin, nous allons compléter la fonction.
+Créez une nouvelle méthode `getCurrentLocation`.
 
-```java
-    protected void getLastLocation() throws SecurityException {
-        // Tests if permission on location is granted
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mFusedLocationClient.getLastLocation()
-                // Success
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // On a eu la dernière position, on vérifie qu'elle n'est pas nulle
-                        if (location != null) {
-                            Log.i("ENSG", "Position:" + location);
-                        } else {
-                            Log.i("ENSG", "Position nulle...");
-                        }
-                    }
-                })
-                // Failure
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("ENSG", "Failure...");
-                        e.printStackTrace();
-                    }
-                })
-            ;
-        } else {
-            // Is not...
-            Toast.makeText(this, "Erreur: impossible d'accéder à la position", Toast.LENGTH_LONG).show();
-        }
-    }
-```
-Comme vous pouvez le voir, la récupération de la dernière position peut échouer, on a donc un écouteur d’événement qui gère le succès de l'opération et un autre l'échec...
-
-Modifier ce code pour que si la position est trouvée il ajout une autre balise sur la carte (vous pouvez par exemple créer une fonction `public void addLastLocationMarker(Location location)`, voir le [diagramme UML](uml/PositionName.png) pour avoir la liste des fonctions qu'il faudra créer).
-
-Voici un exemple de code attendu à l'issue de cet étape :
-
-```java
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
-    private GoogleMap mMap;
-    private FusedLocationProviderClient mFusedLocationClient;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        ActivityMapsBinding binding = ActivityMapsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
-        // Demande la permission d'accès à la position
-        ActivityResultLauncher<String[]> locationPermissionRequest =
-                registerForActivityResult(new ActivityResultContracts
-                                .RequestMultiplePermissions(), result -> {
-                            Boolean fineLocationGranted = result.getOrDefault(
-                                    android.Manifest.permission.ACCESS_FINE_LOCATION, false);
-                            Boolean coarseLocationGranted = result.getOrDefault(
-                                    android.Manifest.permission.ACCESS_COARSE_LOCATION,false);
-                            if (fineLocationGranted != null && fineLocationGranted) {
-                                // Precise location access granted.
-                                Log.i("ENSG", "fineLocationGranted");
-                                getLastLocation();
-                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
-                                // Only approximate location access granted.
-                                Log.i("ENSG", "coarseLocationGranted");
-                                getLastLocation();
-                            } else {
-                                // No location access granted.
-                                Log.e("ENSG", "noLocationGranted");
-                            }
-                        }
-                );
-        locationPermissionRequest.launch(new String[] {
-                android.Manifest.permission.ACCESS_FINE_LOCATION,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-        });
-
-        // Instanciation du client de position
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-    }
-
-    protected void getLastLocation() throws SecurityException {
-        mFusedLocationClient.getLastLocation()
-                // Success
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // On a eu la dernière position, on vérifie qu'elle n'est pas nulle
-                        if (location != null) {
-                            Log.i("ENSG", "Position:" + location);
-                            addLastLocationMarker(location);
-                        } else {
-                            Log.i("ENSG", "Position nulle...");
-                        }
-                    }
-                })
-                // Failure
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("ENSG", "Failure...");
-                        e.printStackTrace();
-                    }
-                })
-        ;
-    }
-
-    private void addLastLocationMarker(Location location) {
-        LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
-        if (mMap != null) {
-            mMap.addMarker(new MarkerOptions().position(position).title("lastLocation"));
-        } else {
-            Log.w("ENSG", "Carte non initialisée. Impossible de mettre le lastLocation marker à " + location);
-        }
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng ensg = new LatLng(48.8410837, 2.5875354);
-        mMap.addMarker(new MarkerOptions().position(ensg).title("ENSG"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ensg, 14));
-
-        // Affichage outils de zoom
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-    }
-}
-```
-
-#### b) Seconde méthode
-
-Le deux méthodes ne sont pas incompatibles. On va donc garder la précédente méthode et afficher un 3ème marqueur « Current position » donnant la position actuelle de l'utilisateur.
-
-Créez une nouvelle méthode `getCurrentLocation`. Appelez-là aux mêmes endroits que `getLastLocation`.
-
-Nous allons dans un premier temps créer une `LocationRequest`, qui va nous permettre de savoir avec quelle précision nous souhaitons suivre la position de l'utilisateur :
+Nous allons dans un premier temps instancier une `LocationRequest`, qui va nous permettre de savoir avec quelle précision nous souhaitons suivre la position de l'utilisateur :
 
 ```java
     protected void getCurrentLocation() throws SecurityException {
@@ -513,7 +372,7 @@ Nous allons dans un premier temps créer une `LocationRequest`, qui va nous perm
     }
 ```
 
-Ensuite, nous allons exécuter la requête de position et lui associer un *callback* précédemment créer :
+Ensuite, nous allons créer un **callback** et exécuter la requête de position en le lui associant :
 
 ```java
     protected void getCurrentLocation() throws SecurityException {
@@ -535,7 +394,7 @@ Ensuite, nous allons exécuter la requête de position et lui associer un *callb
 
 Comme vous pouvez le voir, le second paramètre de la fonction est un callback, donc une classe avec une fonction à exécuter lorsque la position est trouvée. Vous pouvez simplement le déclarer juste avant.
 
-Modifier le code de `onLocationResult` pour afficher et déplacer le marqueur de la position courante (créez par exemple une fonction `public void setCurrentLocationMarkerLocation(Location location)`).
+Modifiez le code de `onLocationResult` pour afficher et déplacer le marqueur de la position courante (créez par exemple une fonction `public void setCurrentLocationMarkerLocation(Location location)`).
 
 Voici un exemple du code attendu :
 
@@ -589,41 +448,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Instanciation du client de position
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-    }
-
-    protected void getLastLocation() throws SecurityException {
-        mFusedLocationClient.getLastLocation()
-                // Success
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // On a eu la dernière position, on vérifie qu'elle n'est pas nulle
-                        if (location != null) {
-                            Log.i("ENSG", "Position:" + location);
-                            addLastLocationMarker(location);
-                        } else {
-                            Log.i("ENSG", "Position nulle...");
-                        }
-                    }
-                })
-                // Failure
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("ENSG", "Failure...");
-                        e.printStackTrace();
-                    }
-                })
-        ;
-    }
-
-    private void addLastLocationMarker(Location location) {
-        LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
-        if (mMap != null) {
-            mMap.addMarker(new MarkerOptions().position(position).title("lastLocation"));
-        } else {
-            Log.w("ENSG", "Carte non initialisée. Impossible de mettre le lastLocation marker à " + location);
-        }
     }
 
     protected void getCurrentLocation() throws SecurityException {
@@ -682,196 +506,74 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 ### 5) Reverse Geocoding
 
-Pour effectuer le géo-codage, il faut envoyer une requête, c'est long... Pour ne pas bloquer l'interface utilisateur, nous allons créer un service. Les services sont des classes Java, comme les activités, mais contrairement aux activités, elles ne sont pas destinées à gérer l'interface mais à effectuer des tâches en arrière plan.
+Pour effectuer le géo-codage, nous allons utiliser la classe [Geocoder](https://developer.android.com/reference/android/location/Geocoder) fournie par l'API.
 
 Notes :
 * il y a de nouveaux strings à ajouter dans les ressources, pensez bien à les ajouter... (quand il y a la fonction `getString(R.string.identifiant)`) ;
 * il vous faudra créer une fonction `setCurrentLocationMarkerTitle` qui, comme son nom l'indique, mettra à jour l'adresse de la position courante.
 
-#### a) Ajout du service
+#### a) Ajout du géocodeur
 
-Créez une nouvelle classe appelée `FetchAddressIntentService`.
-
-Clic droit sur votre package puis :
-![Création d'une nouvelle classe](screens/4_intent_1.png)
-
-Vous pouvez bien évidement créer une classe vide, l'intérêt de faire ainsi est qu'Android Studio vous mâchera le travail : vous n'aurez qu'à modifier le code généré.
-
-Le service a dû être ajouté au fichier `AndroidManifest.xml` :
-
-```xml
-        <service
-            android:name=".FetchAddressIntentService"
-            android:exported="false"/>
-```
-
-Pour communiquer entre votre activité et le service, nous allons utiliser des `Intent`. La première fonction de votre service sera donc `onHandleIntent`, qui va réceptionner et lancer le traitement de l'intent.
-
-Les Intent permettent de passer des couples clef/valeur pour communiquer des données et leur résultats.
-
-La classe a été générée avec deux actions `FOO` et `BAZ`, on va renommer la première `GEOCODE` et supprimer la seconde.
-
-On aura également 2 paramètres : un pour passer la position (`Location`) et un pour passer le receveur (`ResultReceiver`), c'est-à-dire la classe exécutant la fonction de *callback* une fois la position géocodée. Renommez les extra.
-
-Enfin, nous allons ajouter les codes/extra pour communiquer du service au receveur (en accès protégé mais pas privé) :
-* un code de succès,
-* un code d'échec,
-* un extra pour l'adresse,
-* un extra pour le message d'erreur.
-
-Le code nettoyé doit donc ressembler à cela :
+Ajoutez un attribut de classe de type `Geocoder` et instanciez le dans la méthode `onCreate` :
 
 ```java
-public class FetchAddressIntentService extends IntentService {
-    private static final String ACTION_GEOCODE = "fr.ign.positionname.action.GEOCODE";
-    private static final String EXTRA_LOCATION = "fr.ign.positionname.extra.LOCATION";
-    private static final String EXTRA_RECEIVER = "fr.ign.positionname.extra.RECEIVER";
-    protected static final String RESULT_ADDRESS = "fr.ign.positionname.result.ADDRESS";
-    protected static final String RESULT_MESSAGE = "fr.ign.positionname.result.MESSAGE";
-    protected static final int CODE_SUCCESS = 0;
-    protected static final int CODE_ERROR = 1;
+public class MapsActivity extends Fragment {
 
-    public FetchAddressIntentService() {
-        super("FetchAddressIntentService");
-    }
-
-    /**
-     * Starts this service to perform action Geocode with the given parameters. If
-     * the service is already performing a task this action will be queued.
-     *
-     * @see IntentService
-     */
-    public static void startActionGeocode(Context context, Location location, ResultReceiver receiver) {
-        Intent intent = new Intent(context, FetchAddressIntentService.class);
-        intent.setAction(ACTION_GEOCODE);
-        intent.putExtra(EXTRA_LOCATION, location);
-        intent.putExtra(EXTRA_RECEIVER, receiver);
-        context.startService(intent);
-    }
+    // Autres attributs de classe...
+    private Geocoder geocoder;
 
     @Override
-    protected void onHandleIntent(Intent intent) {
-        if (intent != null) {
-            final String action = intent.getAction();
-            if (ACTION_GEOCODE.equals(action)) {
-                final Location location = intent.getParcelableExtra(EXTRA_LOCATION);
-                final ResultReceiver receiver = intent.getParcelableExtra(EXTRA_RECEIVER);
-                handleActionGeocode(location, receiver);
-            } else {
-                Log.e("ENSG", "Action inconnue : " + action);
-            }
-        }
+    protected void onCreate(Bundle savedInstanceState) {
+        // Début de la fonction...
+
+        // Instanciation du géocodeur
+        geocoder = new Geocoder(this, new Locale("fr"));
     }
 
-    /**
-     * Handle action Geocode in the provided background thread with the provided
-     * parameters.
-     */
-    private void handleActionGeocode(Location location, ResultReceiver receiver) {
-        // TODO : gérer l'action géocode
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+    // Reste de la classe...
 }
 ```
 
-La fonction `startActionGeocode` doit être appelée depuis le contrôleur (la classe `MapsActivity`), c'est elle qui va lancer le géocodage, qui sera effectué dans la fonction `handleActionGeocode`. Il faudra la modifier comme suit :
-
-```java
-    private void handleActionGeocode(Location location, ResultReceiver receiver) {
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        String errorMessage = "";
-
-        // Store results
-        List<Address> addresses = null;
-
-        try {
-            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-        } catch (IOException ioException) {
-            // Catch network or other I/O problems.
-            errorMessage = getString(R.string.service_not_available);
-            Log.e("ENSG", errorMessage, ioException);
-        } catch (IllegalArgumentException illegalArgumentException) {
-            // Catch invalid latitude or longitude values.
-            errorMessage = getString(R.string.invalid_lat_long_used);
-            String finalMessage = String.format(Locale.getDefault(), "%s. Latitude = %f, Longitude = %f", errorMessage, location.getLatitude(), location.getLongitude());
-            Log.e("ENSG", finalMessage, illegalArgumentException);
-        }
-
-        // result bundle (to send back data to receiver)
-        Bundle resultBundle = new Bundle();
-        int resultCode;
-
-        // Handle case where no address was found.
-        if (addresses == null || addresses.size()  == 0) {
-            if (errorMessage.isEmpty()) {
-                errorMessage = getString(R.string.no_address_found);
-                Log.e("ENSG", errorMessage);
-            }
-            resultBundle.putString(RESULT_MESSAGE, errorMessage);
-            resultCode = CODE_ERROR;
-        } else {
-            Address address = addresses.get(0);
-            ArrayList<String> addressFragments = new ArrayList<>();
-
-            // Fetch the address lines using getAddressLine,
-            // join them, and send them to the thread.
-            for(int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
-                addressFragments.add(address.getAddressLine(i));
-            }
-            Log.i("ENSG", getString(R.string.address_found));
-            resultCode = CODE_SUCCESS;
-            resultBundle.putString(RESULT_ADDRESS, TextUtils.join(System.getProperty("line.separator"), addressFragments));
-        }
-        receiver.send(resultCode, resultBundle);
-    }
-```
-
-La fonction parait longue mais est en fait très simple :
-* on tente de géo-coder la position (il y a un "try catch" dans le cas où cela échouerait) :
-  * si on ne récupère pas d'adresse, on complète le bundle avec le message d'erreur, et on défini le code de retour sur échec ;
-  * sinon on complète le bundle avec l'adresse et on défini le code de retour sur succès ;
-* on envoi le bundle au receveur avec le code de retour.
-
-#### b) Appel du service
-
-Dans votre classe d'activité, il faut ajouter un attribut de type `ResultReceiver` pour gérer la réception du résultat :
-
-```java
-    private final ResultReceiver currentLocationResultReceiver = new ResultReceiver(new Handler()) {
-        @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-
-            // Is success?
-            if (resultCode == FetchAddressIntentService.CODE_SUCCESS) {
-                // Yes (result is address)
-                String result = resultData.getString(FetchAddressIntentService.RESULT_ADDRESS);
-                setCurrentLocationMarkerTitle(result);
-                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-            } else {
-                // No (result is error message)
-                String message = resultData.getString(FetchAddressIntentService.RESULT_MESSAGE);
-                setCurrentLocationMarkerTitle("");
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-            }
-        }
-    };
-```
+#### b) Appel au géocodeur
 
 On crée une fonction pour lancer l'appel au service de géocodage :
 
 ```java
     public void geocode(Location location) {
-        FetchAddressIntentService.startActionGeocode(this, location, currentLocationResultReceiver);
+        try {
+            // Appel au géocodeur
+            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+            // Si une adresse est trouvée
+            if (!addresses.isEmpty()) {
+                Address address = addresses.get(0);
+                // On va concaténer ses différentes parties
+                StringBuilder bldr = new StringBuilder();
+                for (int i = address.getMaxAddressLineIndex(); i >= 0; i--) {
+                    String part = address.getAddressLine(i);
+                    if (part != null && !part.equals("")) {
+                        if (bldr.length() > 0) {
+                            bldr.append(", ");
+                        }
+                        bldr.append(part);
+                    }
+                }
+                // Et appeler la fonction permettant de modifier le titre du marqueur
+                setCurrentLocationMarkerTitle(bldr.toString());
+            } else {
+                // TODO : Ajouter un message dans les ressources pour quand l'adresse n'est pas trouvée
+                setCurrentLocationMarkerTitle(getString(R.string.no_address_found));
+            }
+        } catch (IOException e) {
+            Log.e("ENSG", e.toString());
+            // TODO : Ajouter un message dans les ressources pour quand il y a une erreur
+            setCurrentLocationMarkerTitle(getString(R.string.unknown_error));
+        }
     }
 ```
 
 Fonction à appeler par exemple au moment de la mise à jours de la position du marqueur.
 
-On transmet :
-* l'objet java qui va gérer le retour ;
-* les données de position.
-
-Il faut enfin faire une dernière fonction pour mettre à jour le titre du marker currentLocation : `setCurrentLocationMarkerTitle()`.
+Il faut enfin faire une dernière fonction pour mettre à jour le titre du marker currentLocation et afficher un Toast : `setCurrentLocationMarkerTitle()`.
 
 Voici le résultat :
 
@@ -885,9 +587,6 @@ Les Google Services sont un moyen simple de se géolocaliser :
 * ou en utilisant la dernière position connue ;
 * ou en s'abonnant aux mises à jour de position.
 
-On peut créer des services (classes java spécialisées) pour effectuer des tâches longues de manière asynchrone (sans bloquer l'interface).
-
-On utilise les `intents` et les `bundles` pour communiquer entre classe.
 
 ## Améliorations nécessaires
 

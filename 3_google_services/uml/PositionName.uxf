@@ -1,56 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
-  <zoom_level>14</zoom_level>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>238</x>
-      <y>126</y>
-      <w>518</w>
-      <h>350</h>
-    </coordinates>
-    <panel_attributes>MapsActivity
+<diagram program="umletino" version="15.1"><zoom_level>14</zoom_level><element><id>UMLClass</id><coordinates><x>238</x><y>126</y><w>518</w><h>280</h></coordinates><panel_attributes>MapsActivity
 --
 - GoogleMap mMap
 - FusedLocationProviderClient mFusedLocationClient
-+ Marker currentLocationMarker
-- ResultReceiver currentLocationResultReceiver
+- Marker currentLocationMarker
+- Geocoder geocoder
 --
 void onCreate()
---
-void getLastLocation()
-void addLastLocationMarker(Location location)
 --
 void getCurrentLocation()
 void setCurrentLocationMarkerLocation(Location location)
 void geocode(Location location)
 void setCurrentLocationMarkerTitle(String title)
 --
-void onMapReady(GoogleMap googleMap)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>126</x>
-      <y>504</y>
-      <w>756</w>
-      <h>280</h>
-    </coordinates>
-    <panel_attributes>FetchAddressIntentService
---
-- static final String ACTION_GEOCODE
-- static final String EXTRA_LOCATION
-- static final String EXTRA_RECEIVER
-+ static final String RESULT_ADDRESS
-+ static final String RESULT_MESSAGE
-+ static final int CODE_SUCCESS
-+ static final int CODE_ERROR
---
-void startActionGeocode(Context context, Location location, ResultReceiver receiver)
-void onHandleIntent(Intent intent)
-void handleActionGeocode(Location location, ResultReceiver receiver)
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-</diagram>
+void onMapReady(GoogleMap googleMap)</panel_attributes><additional_attributes></additional_attributes></element></diagram>
