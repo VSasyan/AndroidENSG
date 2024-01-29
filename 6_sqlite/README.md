@@ -10,7 +10,7 @@ Cette partie permet de voir :
 
 ## Le principe de l'application
 
-L'application sera composée d'un écran de connexion (`LoginActivity`), d'un écran d'inscription (`SigninActivity`), d'une carte permettant la visualisation de points d'intérêt (`MapsActivity`) et d'un formulaire pour saisir de nouveaux points (`NewPointActivity`).
+L'application sera composée d'un écran d'acceuil `MainActivity`), d'une carte permettant la visualisation de points d'intérêt (`MapsActivity`) et d'un formulaire pour saisir de nouveaux points (`FormActivity`).
 
 ## Mise en place
 
@@ -71,11 +71,11 @@ Pensez à ajouter la clef pour voir la carte (cf. formationTemp).
 
 Pour gérer la base, nous allons utiliser un [ORM](https://fr.wikipedia.org/wiki/Mapping_objet-relationnel).
 
-Les ORM sont des outils permettant de faire le lien entre une classe (dans un language de programmation donné) et sa représentation dans une base de donnée.
+Les ORM sont des outils permettant de faire le lien entre une classe (dans un language de programmation donné) et sa représentation dans une base de données.
 
 On peut par exemple citer `doctrine` pour PHP ou `sqlalchemy` pour Python. C'est très pratique, très puissant et en général ils gèrent plusieurs types de bases de données.
 
-Généralement, on ajoute des [annotations](https://fr.wikipedia.org/wiki/Annotation_(informatique)) autour de notre code (Java) afin de décrire comment on veut l'enregistrer en base.
+Généralement, on doit simplement ajouter des [annotations](https://fr.wikipedia.org/wiki/Annotation_(informatique)) autour de notre code (Java/Python/PHP) afin de décrire comment on veut l'enregistrer en base.
 
 #### a) Importation de Room
 
@@ -93,7 +93,7 @@ dependencies {
 }
 ```
 
-**PENSEZ A SYNCHRONISER GRADLE !!!**
+**PENSEZ À SYNCHRONISER GRADLE !!!**
 
 Vous retrouvez un tuto sur Room fait par Google ici : https://developer.android.com/training/data-storage/room?hl=fr#java
 
@@ -179,7 +179,7 @@ Lancez l'application plusieurs fois. Vous devriez voir le nombre d'adresses réc
 
 Augmentez la version, vous devriez alors n'avoir plus qu'une adresse. La base a été réinitialisée.
 
-Vous pouvez récupérer le fichier de la BDD via le Device File Explorer en bas à droite. Chez moi, le fichier a l'adresse /data/data/fr.ign.addressdb/databases/database-name`.
+Vous pouvez récupérer le fichier de la BDD via le Device File Explorer en bas à droite. Chez moi, le fichier a l'adresse `/data/data/fr.ign.addressdb/databases/database-name`.
 
 Une fois récupéré, vous pouvez l'ouvrir via un logiciel gérant le SQLite, par exemple ce site : https://sqliteonline.com/
 
@@ -187,12 +187,16 @@ Une fois récupéré, vous pouvez l'ouvrir via un logiciel gérant le SQLite, pa
 
 Implémentez le code pour gérer l'activité de formulaire :
 * complétion de l'adresse via Geocoder ;
-* sauvegarde dans la base de donnée.
+* sauvegarde dans la base de données.
 
-Implémentez en suite le code pour afficher la carte :
+Implémentez ensuite le code pour afficher la carte :
 * récupérez les entités en base et affichez les ;
 * afficher l'emprise globale des points pour optimiser la vue ;
 * affichez l'adresse de chaque point dans le title du marqueur.
+
+## Jamais fini !
+
+Ajoutez une activité pour visualiser/éditer un point après avoir cliqué dessus sur la carte...
 
 
 ## Les points à retenir
@@ -202,10 +206,6 @@ Les `Intent` permettent de démarrer une nouvelle activité en lui transmettant 
 La classe `AppDatabase` permet de créer le schéma de votre base de donnée et de le tenir à jour.
 
 **Les ORM sont des outils vraiment géniaux !**
-
-## Jamais fini !
-
-Vous pouvez ajouter une activité pour visualiser/éditer un point après avoir cliqué dessus sur la carte...
 
 ## Projet complet
 
