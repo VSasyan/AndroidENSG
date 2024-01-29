@@ -157,7 +157,7 @@ Pour accéder à la base, il faut instancier dans un contrôleur la classe `AppD
             .fallbackToDestructiveMigration()
             .build();
         // Récupération DAO (à mettre en attribut de classe si utilisé ailleurs...)
-        AddressDAO addressDAO = db.addressDao();
+        AddressDao addressDao = db.addressDao();
     }
 ```
 
@@ -166,9 +166,9 @@ Exemple d'utilisation :
 ```java
 // Ajout d'une entité
 Address address = new Address("adresse", 42.0f, 3.0f);
-addressDAO.insert(address);
+addressDao.insert(address);
 // Listing des entités
-List<Address> addresses = addressDAO
+List<Address> addresses = addressDao.getAll();
 // Log (implémentez la fonction toString !!!)
 Log.i("ENSG", addresses.toString());
 ```
