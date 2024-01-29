@@ -10,7 +10,7 @@ Cette partie permet de voir :
 
 ## Le principe de l'application
 
-L'application sera composée d'un écran d'acceuil `MainActivity`), d'une carte permettant la visualisation de points d'intérêt (`MapsActivity`) et d'un formulaire pour saisir de nouveaux points (`FormActivity`).
+L'application sera composée d'un écran d'accueil `MainActivity`), d'une carte permettant la visualisation de points d'intérêt (`MapsActivity`) et d'un formulaire pour saisir de nouveaux points (`FormActivity`).
 
 ## Mise en place
 
@@ -209,4 +209,4 @@ La classe `AppDatabase` permet de créer le schéma de votre base de donnée et 
 
 ## Projet complet
 
-Vous pouvez retrouver le projet complet ici (à venir) : [https://gitlab.com/vsasyan/AddressDB ](https://gitlab.com/vsasyan/AddressDB )
+Vous pouvez retrouver le projet complet ici : [https://gitlab.com/vsasyan/AddressDB ](https://gitlab.com/vsasyan/AddressDB )
